@@ -1,10 +1,14 @@
+import { Dripsy } from './dripsy'
 import { NavigationProvider } from './navigation'
 import { SafeArea } from './safe-area'
+import { StoreReduxProvider } from './store-redux'
 
 export function Provider({ children }: { children: React.ReactNode }) {
   return (
-    <SafeArea>
-      <NavigationProvider>{children}</NavigationProvider>
-    </SafeArea>
+    <StoreReduxProvider>
+      <SafeArea>
+        <NavigationProvider>{children}</NavigationProvider>
+      </SafeArea>
+    </StoreReduxProvider>
   )
 }
