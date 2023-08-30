@@ -1,16 +1,9 @@
-import React, { useState } from 'react'
-import {
-  Image,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { useState } from 'react'
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { StyleSheet } from 'react-native'
 import { auth } from '../firebaseConfig'
-import { useAppDispatch, useAppSelector } from 'app/services/hooks/hook'
+import { useAppDispatch } from 'app/services/hooks/hook'
 import { updateUser } from 'app/store/user'
 
 export default function LoginScreen() {
@@ -67,9 +60,9 @@ export default function LoginScreen() {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <TouchableOpacity style={styles.button} onPress={() => onLoginPress()}>
+        <Pressable style={styles.button} onPress={() => onLoginPress()}>
           <Text style={styles.buttonTitle}>Log in</Text>
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.footerView}>
           <Text style={styles.footerText}>
             Don't have an account?{' '}

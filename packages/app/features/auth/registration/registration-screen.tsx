@@ -1,14 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 
 import React, { useState } from 'react'
-import {
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from 'react-native'
+import { Image, Text, TextInput, View, ScrollView } from 'react-native'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 import { auth } from '../firebaseConfig'
@@ -90,12 +83,9 @@ export default function RegistrationScreen({}) {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => onRegisterPress()}
-        >
+        <Pressable style={styles.button} onPress={() => onRegisterPress()}>
           <Text style={styles.buttonTitle}>Create account</Text>
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.footerView}>
           <Text style={styles.footerText}>
             Already got an account?{' '}

@@ -6,6 +6,7 @@ import Head from 'next/head'
 import React from 'react'
 
 import '../global.css'
+// import '../nativewind-output'
 import { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
