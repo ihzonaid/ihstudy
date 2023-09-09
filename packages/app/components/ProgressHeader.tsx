@@ -1,6 +1,5 @@
 import { HeroOutline } from '@nandorojo/heroicons'
 import { clsx } from 'clsx'
-import { withExpoSnack } from 'nativewind'
 import { TouchableWithoutFeedback } from 'react-native'
 import { Link } from 'solito/link'
 
@@ -37,11 +36,16 @@ function ProgessHeader() {
       web && 'hidden android:hidden ios:hidden md:flex',
       style
     )
-    return (
-      <Link href="/">
-        <HeroOutline.Clock className="className" />
-      </Link>
-    )
+    const getIcon = (name, className) => {
+      if (name == 'close') {
+        return <HeroOutline.XMark className={className} />
+      } else if (name == 'chevron-left') {
+        return <HeroOutline.ChevronLeft className={className} />
+      } else if (name == 'chevron-right') {
+        return <HeroOutline.ChevronRight className={className} />
+      }
+    }
+    return <Link href="/">{getIcon(name, style)}</Link>
   }
 
   return (
@@ -64,35 +68,36 @@ function ProgessHeader() {
               ((subLessonIdx + 1) / subLesson.contents.length) * 100
             )
             return (
-              <TouchableWithoutFeedback key={index}>
+              <Pressable key={index}>
                 <View
-                  className="h-3 flex-shrink rounded-md border-2 border-slate-200 bg-slate-50"
-                  style={[
-                    {
-                      width: `${width}%`,
-                      marginRight: index == lessons.length - 1 ? 0 : 2,
-                    },
-                    index < lessonIdx
-                      ? {
-                          backgroundColor: colors.primary,
-                        }
-                      : null,
-                  ]}
+                  className="h-3 flex-shrink 
+                  rounded-md border-2 border-slate-200 bg-red-200"
+                  // style={[
+                  //   {
+                  //     width: `${width}%`,
+                  //     marginRight: index == lessons.length - 1 ? 0 : 2,
+                  //   },
+                  //   index < lessonIdx
+                  //     ? {
+                  //         backgroundColor: colors.primary,
+                  //       }
+                  //     : null,
+                  // ]}
                 >
                   <View
-                    style={[
-                      index === lessonIdx
-                        ? {
-                            width: `${progressPercentage}%`,
-                            height: '100%',
-                            backgroundColor: colors.secondary,
-                            borderRadius: 6,
-                          }
-                        : null,
-                    ]}
+                  // style={[
+                  //   index === lessonIdx
+                  //     ? {
+                  //         width: `${progressPercentage}%`,
+                  //         height: '100%',
+                  //         backgroundColor: colors.secondary,
+                  //         borderRadius: 6,
+                  //       }
+                  //     : null,
+                  // ]}
                   />
                 </View>
-              </TouchableWithoutFeedback>
+              </Pressable>
             )
           })}
         </View>
@@ -109,15 +114,15 @@ interface ScoreComponentProps {
 }
 export const ScoreComponent: React.FC<ScoreComponentProps> = ({ color }) => {
   return (
-    <View className="ml-3 flex flex-row items-center">
+    <View className="flex flex-row items-center justify-center">
       <Text className=" text-base" style={{ color: color }}>
         0
       </Text>
-      <View className="mr-1 lg:mr-6">
+      <View className="ml-2">
         <HeroOutline.AcademicCap />
       </View>
     </View>
   )
 }
 
-export default withExpoSnack(ProgessHeader)
+export default ProgessHeader

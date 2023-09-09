@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  View,
-  ScrollView,
-  Text,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-} from 'react-native'
+import { View, Text } from 'app/design/styled'
+// import { ScrollView } from 'app/design/styled'
+import { ScrollView } from 'react-native'
 
 import ContentContainer from 'app/components/content_container'
 import AppButton from 'app/components/AppButton'
@@ -15,12 +11,12 @@ import { addContent, incrementIndex, resetIndex } from 'app/store/sublesson'
 import { useAppSelector, useAppDispatch } from 'app/services/hooks/hook'
 import { incrementLessonIdx } from 'app/store/lessons'
 import ProgressHeader from 'app/components/ProgressHeader'
-import { withExpoSnack } from 'nativewind'
 import CardQuiz from 'app/components/CardQuiz'
 import Prompt from 'app/components/Prompt'
 import EditAbleText from 'app/components/EditableText'
 import { updateLessonTitle } from 'app/store/editLesson'
 import AddContent from 'app/components/AddContent'
+import { Hint } from 'app/components/Hint'
 
 export function ContentScreen() {
   const [showButton, setShowButton] = useState(true)
@@ -31,12 +27,12 @@ export function ContentScreen() {
   const dispatch = useAppDispatch()
 
   const { lessons, edible } = useAppSelector((state) => state.editLesson)
-  const onePageLesson = lessons[lessonIdx]
+  const onePageLesson = lessons[lessonIdx]!
 
   useEffect(() => {
     return () => {
-      if (onePageLesson.contents[index].type === ContentType.info) {
-        const newContent = onePageLesson.contents[index]
+      if (onePageLesson.contents[index]!.type === ContentType.info) {
+        const newContent = onePageLesson.contents[index]!
         dispatch(addContent(newContent))
       }
     }
@@ -77,7 +73,7 @@ export function ContentScreen() {
     toggleHint()
   }
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const handleScroll = (event) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent
     const isHide =
       contentOffset.y + layoutMeasurement.height > contentSize.height - 100
@@ -87,6 +83,12 @@ export function ContentScreen() {
   function closeHint(): void {
     setHint(false)
   }
+
+  // return (
+  //   <View className="absolute top-0 z-10 h-3 w-full ">
+  //     <ProgressHeader />
+  //   </View>
+  // )
 
   return (
     <>
@@ -99,6 +101,7 @@ export function ContentScreen() {
         <View className="absolute top-0 z-10 h-3 w-full ">
           <ProgressHeader />
         </View>
+
         <View className="flex-1 items-center px-2">
           <View className="h-full w-full sm:w-2/3 md:w-2/3 lg:w-1/2">
             {/* {showHint && <Hint close={closeHint} />} */}
@@ -125,19 +128,19 @@ export function ContentScreen() {
 
             <AddContent lid={lessonIdx} />
 
-            {/* {
+            {
               <View className="hidden px-2  sm:flex">
                 <AppButton content="Continue" onPress={onPress} />
               </View>
-            } */}
+            }
           </View>
         </View>
+        {showButton && (
+          <View className="absolute bottom-2 w-full px-2 sm:hidden">
+            <AppButton content="Continue" onPress={onPress} />
+          </View>
+        )}
       </ScrollView>
-      {showButton && (
-        <View className="absolute bottom-2 w-full px-2 sm:hidden">
-          <AppButton content="Continue" onPress={onPress} />
-        </View>
-      )}
     </>
   )
 
@@ -152,9 +155,22 @@ export function ContentScreen() {
         />
       )
     } else if (item.type == ContentType.question) {
-      return <CardQuiz question={item.content} cid={cid} lid={lessonIdx} />
+      return (
+        <CardQuiz
+          key={index}
+          question={item.content}
+          cid={cid}
+          lid={lessonIdx}
+        />
+      )
     } else if (item.type == ContentType.prompt) {
-      return <Prompt prompt={item.content} ids={{ cid, lid: lessonIdx }} />
+      return (
+        <Prompt
+          key={index}
+          prompt={item.content}
+          ids={{ cid, lid: lessonIdx }}
+        />
+      )
     } else return <Text>no content</Text>
   }
 }
