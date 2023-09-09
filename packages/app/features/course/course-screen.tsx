@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from 'app/services/hooks/hook'
 import { updateCourseDes, updateCourseTitle } from 'app/store/editCourse'
 import EditAbleText from 'app/components/EditableText'
 import { ChapterItem } from 'app/components/ChapterItem'
+import { divide } from 'lodash'
 
 export function CourseScreen() {
   const { course } = useAppSelector((state) => state.editCourse)
@@ -55,9 +56,9 @@ export function CourseScreen() {
       <ScrollView>
         <Nav />
 
-        <View className="flex justify-center sm:m-auto md:m-0 md:flex-row md:justify-start md:p-5">
+        <View className="flex flex-col justify-center sm:m-auto md:m-0 md:flex-row md:justify-start md:p-5">
           <View className="md:m-3 lg:m-10 ">
-            <View className="flex border-2 border-slate-300 md:w-[400px] lg:w-[500px]">
+            <View className="flex flex-col border-2 border-slate-300 md:w-[400px] lg:w-[500px]">
               <View className="web:pt-0 px-2 pt-3" style={{ elevation: 8 }}>
                 <View className="px-4" style={{ elevation: 8 }}>
                   <View className="flex flex-row items-center justify-between py-2">
@@ -80,7 +81,8 @@ export function CourseScreen() {
             <FlatList
               data={course.chapters}
               renderItem={({ item, index }) => (
-                <ChapterItem index={index} chapter={item} />
+                // <Text>hi</Text>
+                <ChapterItem key={index} index={index} chapter={item} />
               )}
               keyExtractor={(item, index) => index.toString()} // Assuming you don't have unique IDs in the data.
             />

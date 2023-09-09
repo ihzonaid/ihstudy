@@ -70,7 +70,7 @@ export const SubChapterItem: React.FC<LessonItemProps> = ({
       <View className="sm ml-10 h-6 w-1 bg-slate-400" />
 
       <Link href="/content">
-        <View className="flex flex-row items-center bg-slate-100 p-2 ">
+        <View className="flex flex-row items-center p-2 ">
           {ui()}
           <EditAbleText
             className="text-base"
