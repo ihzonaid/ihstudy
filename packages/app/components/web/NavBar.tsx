@@ -14,10 +14,13 @@ const Nav = ({ onHamberge }: NavProps) => {
 
   function NavItem({ name }: { name: string }) {
     return (
-      <Link href="/(tabs)/course">
-        <View className="mx-2 items-center justify-between rounded-lg bg-blue-200 p-1 hover:bg-blue-200">
+      <Link href="/course" className="">
+        <View
+          className=" flex  items-center
+         justify-between rounded-lg  p-1 hover:border-b-2 "
+        >
           <HeroOutline.Bookmark color={'red'} />
-          <Text className="text-black hover:text-white">{name}</Text>
+          <Text className="text-black">{name}</Text>
         </View>
       </Link>
     )
@@ -25,16 +28,19 @@ const Nav = ({ onHamberge }: NavProps) => {
 
   return (
     <>
-      <View className="mb-4 flex flex-row items-center justify-between bg-red-300 px-2 sm:px-16">
-        <Pressable className="flex h-8 w-20 items-center justify-center rounded-lg bg-blue-400 hover:bg-blue-600 sm:w-36">
-          <Text className="text-center text-base hover:text-red-200">
-            ihStudy
-          </Text>
-        </Pressable>
+      <View
+        className="shadow-2 mb-4 flex flex-row
+       items-center justify-between  px-2 drop-shadow-2xl sm:px-16 "
+      >
+        <View className="flex flex-row items-center">
+          <Pressable className="mr-10 flex h-8 w-20 items-center justify-center rounded-lg bg-blue-400 hover:bg-blue-600 sm:w-36">
+            <Text className="text-center text-base">ihStudy</Text>
+          </Pressable>
 
-        <View className="flex-row sm:flex sm:flex-row">
-          <NavItem name="Home" />
-          <NavItem name="Course" />
+          <View className="flex flex-row  p-2">
+            <NavItem name="Home" />
+            <NavItem name="Course" />
+          </View>
         </View>
 
         {/* <Searchbar

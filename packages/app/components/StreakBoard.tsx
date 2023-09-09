@@ -1,17 +1,18 @@
 import { View, Text } from 'app/design/styled'
 import { ScoreComponent } from './ProgressHeader'
 import { HeroOutline } from '@nandorojo/heroicons'
+import clsx from 'clsx'
 
 export default function StreakBoard({}) {
   return (
-    <View className="flex md:flex-row md:items-center md:justify-between">
+    <View className="flex flex-col md:flex-row md:items-center md:justify-between">
       <View className="flex max-w-sm flex-row items-center px-2 py-4">
         <View className="w-1/3 p-4">
           <View className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-blue-300">
             <ScoreComponent color="black" />
           </View>
         </View>
-        <View className="flex">
+        <View className="flex flex-col">
           <Text className="text-2xl font-bold">Hello, IH!</Text>
           <Text className="text-base font-semibold">
             Solve 3 problems daily to start a streak
@@ -22,7 +23,7 @@ export default function StreakBoard({}) {
 
       <View className="mb-5 h-[1px]   bg-slate-400 md:h-full md:w-[1px]" />
 
-      <View className="flex w-full flex-row justify-around md:w-1/2">
+      <View className="flex w-full flex-row justify-around  md:w-1/2">
         <StreakDay day="Th" isStreak={true} />
         <StreakDay day="F" />
         <StreakDay day="S" />
@@ -34,12 +35,12 @@ export default function StreakBoard({}) {
 }
 
 function StreakDay({ day, isStreak }: { day: String; isStreak?: boolean }) {
-  let className = 'flex justify-center items-center w-8  h-16 py-2 rounded-xl'
+  let className = 'flex justify-center items-center   h-16 py-2 rounded-xl '
   if (isStreak) className = className + ' border-2 border-slate-500'
   return (
-    <View className={className}>
+    <View className={clsx(className, 'px-4')}>
       <Text>{day}</Text>
-      <HeroOutline.Bolt />
+      <HeroOutline.Bolt width={20} height={20} />
     </View>
   )
 }
