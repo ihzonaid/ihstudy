@@ -62,17 +62,17 @@ function ProgessHeader() {
         {/* <View className='flex flex-row items-center'> */}
 
         <IconButton name="chevron-left" web={true} />
-        <View className="flex flex-1 flex-row">
+        <View className="flex flex-1 flex-row bg-red-100">
           {lessons.map((subLesson, index) => {
             const width = (subLesson.contents.length / 20) * 100
             const progressPercentage = Math.floor(
               ((subLessonIdx + 1) / subLesson.contents.length) * 100
             )
             return (
-              <Pressable key={index}>
+              <Pressable key={index} className="">
                 <View
-                  className="h-3 flex-shrink 
-                  rounded-md border-2 border-slate-200 bg-red-200"
+                  className="h-3 w-[120px]
+                  flex-shrink rounded-md border-2 border-blue-400"
                   // style={[
                   //   {
                   //     width: `${width}%`,
@@ -86,16 +86,17 @@ function ProgessHeader() {
                   // ]}
                 >
                   <View
-                  // style={[
-                  //   index === lessonIdx
-                  //     ? {
-                  //         width: `${progressPercentage}%`,
-                  //         height: '100%',
-                  //         backgroundColor: colors.secondary,
-                  //         borderRadius: 6,
-                  //       }
-                  //     : null,
-                  // ]}
+                    className="w-full bg-red-100"
+                    // style={[
+                    //   index === lessonIdx
+                    //     ? {
+                    //         width: `${progressPercentage}%`,
+                    //         height: '100%',
+                    //         backgroundColor: colors.secondary,
+                    //         borderRadius: 6,
+                    //       }
+                    //     : null,
+                    // ]}
                   />
                 </View>
               </Pressable>
