@@ -10,6 +10,7 @@ export function TestScreen() {
     <View>
       <AcademicCap width={20} height={20} />
       <ArrowDown stroke={'gray'} />
+      <HeroOutline.Variable stroke={'gray'} />
 
       <Svg height="50%" width="50%" viewBox="0 0 100 100" stroke={'red'}>
         <Path

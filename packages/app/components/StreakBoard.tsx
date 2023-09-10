@@ -40,7 +40,7 @@ function StreakDay({ day, isStreak }: { day: String; isStreak?: boolean }) {
   return (
     <View className={clsx(className, 'px-4')}>
       <Text>{day}</Text>
-      <HeroOutline.Bolt width={20} height={20} />
+      <HeroOutline.Bolt width={20} height={20} stroke={'gray'} />
     </View>
   )
 }

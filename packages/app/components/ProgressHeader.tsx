@@ -119,7 +119,7 @@ export const ScoreComponent: React.FC<ScoreComponentProps> = ({ color }) => {
         0
       </Text>
       <View className="ml-2">
-        <HeroOutline.AcademicCap />
+        <HeroOutline.AcademicCap stroke={'gray'} />
       </View>
     </View>
   )
