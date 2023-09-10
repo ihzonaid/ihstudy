@@ -1,6 +1,7 @@
 import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
+import { ArrowDown } from '@nandorojo/iconic'
 
 export default function HomeScreen() {
   const sx = useSx()
@@ -15,6 +16,7 @@ export default function HomeScreen() {
         bg: 'red',
       }}
     >
+      <ArrowDown />
       <H1 sx={{ fontWeight: '800' }}>Welcome to Solito.</H1>
       <View sx={{ maxWidth: 600 }}>
         <P sx={{ textAlign: 'center' }}>

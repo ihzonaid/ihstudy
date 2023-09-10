@@ -38,11 +38,11 @@ function ProgessHeader() {
     )
     const getIcon = (name, className) => {
       if (name == 'close') {
-        return <HeroOutline.XMark className={className} />
+        return <HeroOutline.XMark className={className} stroke="gray" />
       } else if (name == 'chevron-left') {
-        return <HeroOutline.ChevronLeft className={className} />
+        return <HeroOutline.ChevronLeft className={className} stroke="gray" />
       } else if (name == 'chevron-right') {
-        return <HeroOutline.ChevronRight className={className} />
+        return <HeroOutline.ChevronRight className={className} stroke="gray" />
       }
     }
     return <Link href="/">{getIcon(name, style)}</Link>

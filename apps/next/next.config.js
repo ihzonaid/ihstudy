@@ -19,6 +19,7 @@ const nextConfig = {
     'react-native-gesture-handler',
     'react-native-svg',
     '@nandorojo/heroicons',
+    '@nandorojo/iconic',
     '@expo/html-elements',
     'react-native-gesture-handler',
     'dripsy'
