@@ -1,12 +1,10 @@
 import { HeroOutline } from '@nandorojo/heroicons'
 import { clsx } from 'clsx'
-import { TouchableWithoutFeedback } from 'react-native'
 import { Link } from 'solito/link'
 
 import { Pressable, Text, View } from 'app/design/styled'
 import useTheme from 'app/design/theming/useTheme'
 import { useAppSelector } from 'app/services/hooks/hook'
-// import { Link } from 'expo-router'
 
 interface IconButtonProps {
   name: string
@@ -38,21 +36,24 @@ function ProgessHeader() {
     )
     const getIcon = (name, className) => {
       if (name == 'close') {
-        return <HeroOutline.XMark className={className} stroke="gray" />
+        return <HeroOutline.XMark className={className} stroke="black" />
       } else if (name == 'chevron-left') {
-        return <HeroOutline.ChevronLeft className={className} stroke="gray" />
+        return <HeroOutline.ChevronLeft className={className} stroke="black" />
       } else if (name == 'chevron-right') {
-        return <HeroOutline.ChevronRight className={className} stroke="gray" />
+        return <HeroOutline.ChevronRight className={className} stroke="black" />
       }
     }
-    return <Link href="/">{getIcon(name, style)}</Link>
+    return (
+      <Link href="/">
+        <View className=" rounded-full p-2 hover:bg-blue-100">
+          {getIcon(name, style)}
+        </View>
+      </Link>
+    )
   }
 
   return (
-    <View
-      className="web:pt-0 flex h-20 flex-row items-center justify-between pt-3"
-      style={{ backgroundColor: colors.surfaceContainerLowest }}
-    >
+    <View className="web:pt-0 flex h-12 flex-row items-center justify-between bg-slate-100 drop-shadow-md">
       <View className="ml-1 lg:ml-6">
         <IconButton name="close" />
       </View>
