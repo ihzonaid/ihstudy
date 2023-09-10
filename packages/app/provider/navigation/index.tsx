@@ -1,4 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
+import { MyTabs } from 'app/navigation/native/tab'
 import * as Linking from 'expo-linking'
 import { useMemo } from 'react'
 

@@ -19,5 +19,8 @@
     "native": "cd apps/expo && yarn start",
     "web": "cd apps/next && yarn next"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.8"
+  }
 }
