@@ -9,10 +9,10 @@ import {
 import { clsx } from 'clsx'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
-import { GestureResponderEvent, Pressable, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'app/design/styled'
 import { useDispatch } from 'react-redux'
 import EditAbleText from './EditableText'
-import { Hoverable } from './Themed'
+import { GestureResponderEvent } from 'react-native'
 
 type CardQuizProps = {
   question: CardQuizType
@@ -21,7 +21,7 @@ type CardQuizProps = {
 }
 
 export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
-  const [editabl, setEditable] = useState(true)
+  const [editabl, setEditable] = useState(false)
   const mcq = question.mcq
   const [isFlipped, setFlipped] = useState<boolean>(false)
   const [isOptionCorrect, setSelection] = useState<boolean>(false)
@@ -95,7 +95,7 @@ export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
           >
             {mcq.question}
           </EditAbleText>
-          <View className="py-2">
+          <View className=" py-2">
             {mcq.options.map((v, i) => (
               <CardOption
                 option={v}
@@ -111,7 +111,7 @@ export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
             ))}
           </View>
 
-          <View className={!submitted ? 'flex-row' : 'flex-col'}>
+          <View className={clsx('flex', !submitted ? 'flex-row' : 'flex-col')}>
             {!editabl && !submitted && (
               <CardButton
                 handlePress={handleSubmit}
@@ -132,7 +132,7 @@ export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
         </View>
       )}
       {isFlipped && (
-        <View className="flex">
+        <View className="flex flex-col">
           <Text className="my-2 text-xl font-bold">Explaination</Text>
           <EditAbleText
             className="my-4 text-base"
@@ -173,16 +173,16 @@ export function CardButton({
   else commonStyle += 'bg-black text-white'
 
   return (
-    <Hoverable
-      hoveredStyle="bg-blue-300 rounded-lg"
+    <Pressable
       disabled={type === 'disable'}
       onPress={handlePress}
       className={clsx(
-        `flex items-start justify-center active:bg-blue-600 ${style}`
+        `active:bg-blue-600  items-start  ${style}`,
+        'hover:bg-blue-300 rounded-lg'
       )}
     >
       <Text className={commonStyle}>{content}</Text>
-    </Hoverable>
+    </Pressable>
   )
 }
 
@@ -217,7 +217,7 @@ function CardOption({
       onHoverOut={() => setHovered(false)}
       onPress={handlePress}
       className={clsx(
-        'my-1 flex-row items-center   p-2',
+        'my-1 flex flex-row items-center   p-2',
         hovered && 'bg-slate-300',
         !disabled && 'active:bg-slate-400'
       )}
@@ -225,14 +225,14 @@ function CardOption({
     >
       <View
         className={clsx(
-          'h-7 w-7 border-2 border-slate-400 p-1',
+          'border-slate-400 h-7 w-7 border-2 p-1',
           multiChoice ? 'rounded-sm' : 'rounded-full',
           'mr-2 flex items-center justify-center'
         )}
       >
         <View
           className={clsx(
-            'h-4 w-4 bg-black',
+            'bg-black h-4 w-4',
             multiChoice ? 'rounded-sm' : 'rounded-full',
             !selected && 'hidden'
           )}

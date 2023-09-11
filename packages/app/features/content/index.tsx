@@ -92,18 +92,17 @@ export function ContentScreen() {
 
   return (
     <>
+      <View className="fixed top-0 z-10 h-3 w-full">
+        <ProgressHeader />
+      </View>
       <ScrollView
         className=" bg-slate-100 pb-80"
         onScroll={handleScroll}
         ref={scrollViewRef}
         scrollEventThrottle={20}
       >
-        <View className="absolute top-0 z-10 h-3 w-full ">
-          <ProgressHeader />
-        </View>
-
-        <View className="flex-1 items-center px-2">
-          <View className="h-full w-full sm:w-2/3 md:w-2/3 lg:w-1/2">
+        <View className="flex-1 items-center !justify-center px-2">
+          <View className="mx-auto  w-full sm:w-2/3 md:w-2/3 lg:w-1/2">
             {/* {showHint && <Hint close={closeHint} />} */}
 
             <View className="mb-3 ml-2 mt-20">
@@ -126,7 +125,7 @@ export function ContentScreen() {
                   return renderItem(item, index)
                 })}
 
-            <AddContent lid={lessonIdx} />
+            {edible ? <AddContent lid={lessonIdx} /> : null}
 
             {
               <View className="hidden px-2  sm:flex">

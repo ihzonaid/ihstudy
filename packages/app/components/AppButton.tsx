@@ -1,5 +1,4 @@
 import { Pressable, Text } from 'app/design/styled'
-import useTheme from 'app/design/theming/useTheme'
 
 export enum ButtonType {
   primary = 'primary',
@@ -14,12 +13,11 @@ interface AppButtonProps {
 }
 
 const AppButton = ({ content, type, onPress }: AppButtonProps) => {
-  const { colors: color } = useTheme()
-
   return (
     <Pressable
-      className="mb-5 flex w-full flex-row justify-center rounded-md py-2"
-      style={{ backgroundColor: color.onBackground }}
+      className="bg-slate-700 text-white
+       mb-5 flex w-full
+        flex-row justify-center rounded-md py-2"
       onPress={onPress}
     >
       <Text className="text-lg">{content}</Text>

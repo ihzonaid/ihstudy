@@ -9,6 +9,7 @@ export default function EditAbleText({
   onSave,
   ...props
 }: RNText['props'] & { onSave?: (edited: string) => void; lineNum?: number }) {
+  const [editMode, setEditMode] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [editedText, setEditedText] = useState(props.children)
 
@@ -27,7 +28,7 @@ export default function EditAbleText({
 
   return (
     <View className="flex-1">
-      {isEditing ? (
+      {isEditing && editMode ? (
         <View className="flex-row items-center">
           <TextInput
             multiline
@@ -43,7 +44,7 @@ export default function EditAbleText({
         </View>
       ) : (
         <Pressable onPress={startEditing}>
-          <Text className={props.className} {...props} />
+          <Text className={clsx(props.className)} {...props} />
         </Pressable>
       )}
     </View>
