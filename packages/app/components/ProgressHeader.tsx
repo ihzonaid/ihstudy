@@ -5,6 +5,7 @@ import { Link } from 'solito/link'
 import { Pressable, Text, View } from 'app/design/styled'
 import useTheme from 'app/design/theming/useTheme'
 import { useAppSelector } from 'app/services/hooks/hook'
+import { View as RNView } from 'react-native'
 
 interface IconButtonProps {
   name: string
@@ -121,7 +122,7 @@ export const ScoreComponent: React.FC<ScoreComponentProps> = ({
   )
 }
 
-type ProgressContainer = {
+type ProgressContainerProps = {
   width: number
   index: number
   lessonsLength: number
@@ -129,7 +130,7 @@ type ProgressContainer = {
   progressPercentage: number
 }
 
-const ProgressContainer: React.FC<ProgressContainer> = ({
+const ProgressContainer: React.FC<ProgressContainerProps> = ({
   width,
   index,
   lessonsLength,
@@ -138,9 +139,11 @@ const ProgressContainer: React.FC<ProgressContainer> = ({
 }) => {
   return (
     <View
-      className="h-3 flex-1
-                  flex-shrink rounded-md border-2 border-blue-400"
-      style={{ width: '20%' }}
+      className={clsx(
+        'h-3 flex-1',
+        'flex flex-shrink rounded-md border-2 ',
+        index <= lessonIdx ? 'border-blue-400' : 'border-slate-400'
+      )}
       // style={[
       // {
       // width: `${width}%`,
@@ -154,21 +157,23 @@ const ProgressContainer: React.FC<ProgressContainer> = ({
       //   : null,
       // ]}
     >
-      <View
-        className="w-full bg-red-100"
-        // style={
-        // [
-        // index === lessonIdx
-        //   ? {
-        //       width: `${progressPercentage}%`,
-        //       width: `${100}%`,
-        //       height: '100%',
-        //       backgroundColor: colors.secondary,
-        //       borderRadius: 6,
-        //     }
-        //   : null,
-        // ]
-        // }
+      <RNView
+        className={clsx(
+          index < lessonIdx ? 'bg-blue-300' : null
+          // index == lessonIdx ? 'bg-blue-600' : null
+        )}
+        style={[
+          index < lessonIdx
+            ? { backgroundColor: 'green', width: '100%' }
+            : null,
+          index === lessonIdx
+            ? {
+                width: `${progressPercentage}%`,
+                height: '100%',
+                backgroundColor: 'blue',
+              }
+            : null,
+        ]}
       />
     </View>
   )

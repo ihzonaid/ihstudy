@@ -177,8 +177,8 @@ export function CardButton({
       disabled={type === 'disable'}
       onPress={handlePress}
       className={clsx(
-        `active:bg-blue-600  items-start  ${style}`,
-        'hover:bg-blue-300 rounded-lg'
+        `items-start  active:bg-blue-600  ${style}`,
+        'rounded-lg hover:bg-blue-300'
       )}
     >
       <Text className={commonStyle}>{content}</Text>
@@ -225,14 +225,14 @@ function CardOption({
     >
       <View
         className={clsx(
-          'border-slate-400 h-7 w-7 border-2 p-1',
+          'h-7 w-7 border-2 border-slate-400 p-1',
           multiChoice ? 'rounded-sm' : 'rounded-full',
           'mr-2 flex items-center justify-center'
         )}
       >
         <View
           className={clsx(
-            'bg-black h-4 w-4',
+            'h-4 w-4 bg-black',
             multiChoice ? 'rounded-sm' : 'rounded-full',
             !selected && 'hidden'
           )}
@@ -252,5 +252,3 @@ function CardOption({
     </Pressable>
   )
 }
-
-// export default withExpoSnack(CardQuiz)
