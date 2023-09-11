@@ -45,7 +45,7 @@ function ProgessHeader() {
     }
     return (
       <Link href="/">
-        <View className=" hover:bg-blue-100 rounded-full p-2">
+        <View className=" rounded-full p-2 hover:bg-blue-100">
           {getIcon(name, style)}
         </View>
       </Link>
@@ -54,8 +54,8 @@ function ProgessHeader() {
 
   return (
     <View
-      className="web:pt-0 bg-slate-100 flex
-     h-12 flex-row items-center justify-between px-6 drop-shadow-md"
+      className="web:pt-0 flex h-12
+     flex-row items-center justify-between bg-slate-100 px-6 drop-shadow-md"
     >
       <View className="ml-1 lg:ml-6">
         <IconButton name="close" />
@@ -75,6 +75,7 @@ function ProgessHeader() {
             return (
               // <Pressable key={index} className="">
               <ProgressContainer
+                key={index}
                 width={width}
                 index={index}
                 lessonIdx={lessonIdx}
@@ -111,7 +112,7 @@ export const ScoreComponent: React.FC<ScoreComponentProps> = ({
       <View
         className={clsx(
           'ml-2',
-          hoverable ? 'hover:bg-blue-200  rounded-full p-2' : null
+          hoverable ? 'rounded-full  p-2 hover:bg-blue-200' : null
         )}
       >
         <HeroOutline.Bolt stroke={'black'} />
@@ -137,8 +138,8 @@ const ProgressContainer: React.FC<ProgressContainer> = ({
 }) => {
   return (
     <View
-      className="border-blue-400 h-3
-                  flex-1 flex-shrink rounded-md border-2"
+      className="h-3 flex-1
+                  flex-shrink rounded-md border-2 border-blue-400"
       style={{ width: '20%' }}
       // style={[
       // {
@@ -154,7 +155,7 @@ const ProgressContainer: React.FC<ProgressContainer> = ({
       // ]}
     >
       <View
-        className="bg-red-100 w-full"
+        className="w-full bg-red-100"
         // style={
         // [
         // index === lessonIdx

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { use, useEffect, useRef, useState } from 'react'
 import { View, Text } from 'app/design/styled'
 // import { ScrollView } from 'app/design/styled'
 import { ScrollView } from 'react-native'
@@ -25,10 +25,10 @@ export function ContentScreen() {
   const { index } = useAppSelector((state) => state.subLesson)
   const { lessonIdx } = useAppSelector((state) => state.lesson)
   const dispatch = useAppDispatch()
-
   const { lessons, edible } = useAppSelector((state) => state.editLesson)
   const onePageLesson = lessons[lessonIdx]!
 
+  // useEffects
   useEffect(() => {
     return () => {
       if (onePageLesson.contents[index]!.type === ContentType.info) {
@@ -46,6 +46,7 @@ export function ContentScreen() {
     }
   }, [lessonIdx])
 
+  // Functions
   function toggleHint() {
     setHint(!showHint)
   }
@@ -84,18 +85,13 @@ export function ContentScreen() {
     setHint(false)
   }
 
-  // return (
-  //   <View className="absolute top-0 z-10 h-3 w-full ">
-  //     <ProgressHeader />
-  //   </View>
-  // )
-
   return (
     <>
       <View className="fixed top-0 z-10 h-3 w-full">
         <ProgressHeader />
       </View>
       <ScrollView
+        style={{ paddingBottom: 250 }}
         className=" bg-slate-100 pb-80"
         onScroll={handleScroll}
         ref={scrollViewRef}
@@ -118,58 +114,70 @@ export function ContentScreen() {
 
             {/* <YoutubeVideo /> */}
             {edible
-              ? onePageLesson.contents.map((item, index) => {
-                  return renderItem(item, index)
+              ? onePageLesson.contents.map((item, idx) => {
+                  return (
+                    <RenderContent
+                      key={idx}
+                      cid={idx}
+                      index={index}
+                      item={item}
+                      lessonIdx={lessonIdx}
+                    />
+                  )
                 })
-              : onePageLesson.contents.slice(0, index).map((item, index) => {
-                  return renderItem(item, index)
+              : onePageLesson.contents.slice(0, index).map((item, idx) => {
+                  return (
+                    <RenderContent
+                      key={idx}
+                      cid={idx}
+                      index={index}
+                      item={item}
+                      lessonIdx={lessonIdx}
+                    />
+                  )
                 })}
 
             {edible ? <AddContent lid={lessonIdx} /> : null}
 
             {
-              <View className="hidden px-2  sm:flex">
+              <View className="hidden w-24  px-2 sm:flex">
                 <AppButton content="Continue" onPress={onPress} />
               </View>
             }
           </View>
         </View>
         {showButton && (
-          <View className="absolute bottom-2 w-full px-2 sm:hidden">
+          <View className="fixed bottom-2 w-full px-2 sm:hidden">
             <AppButton content="Continue" onPress={onPress} />
           </View>
         )}
       </ScrollView>
     </>
   )
-
-  function renderItem(item: Content, cid: number) {
-    if (item.type == ContentType.info) {
-      return (
-        <ContentContainer
-          content={item.content.text}
-          key={index}
-          cid={index}
-          lid={lessonIdx}
-        />
-      )
-    } else if (item.type == ContentType.question) {
-      return (
-        <CardQuiz
-          key={index}
-          question={item.content}
-          cid={cid}
-          lid={lessonIdx}
-        />
-      )
-    } else if (item.type == ContentType.prompt) {
-      return (
-        <Prompt
-          key={index}
-          prompt={item.content}
-          ids={{ cid, lid: lessonIdx }}
-        />
-      )
-    } else return <Text>no content</Text>
-  }
+}
+type RenderContentProps = {
+  item: Content
+  cid: number
+  index: number
+  lessonIdx: number
+}
+const RenderContent: React.FC<RenderContentProps> = ({
+  cid,
+  item,
+  index,
+  lessonIdx,
+}) => {
+  if (item.type == ContentType.info) {
+    return (
+      <ContentContainer
+        content={item.content.text}
+        cid={index}
+        lid={lessonIdx}
+      />
+    )
+  } else if (item.type == ContentType.question) {
+    return <CardQuiz question={item.content} cid={cid} lid={lessonIdx} />
+  } else if (item.type == ContentType.prompt) {
+    return <Prompt prompt={item.content} ids={{ cid, lid: lessonIdx }} />
+  } else return <Text>no content</Text>
 }
