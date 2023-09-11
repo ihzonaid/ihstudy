@@ -97,15 +97,24 @@ function ProgessHeader() {
 
 interface ScoreComponentProps {
   color: string
+  hoverable?: boolean
 }
-export const ScoreComponent: React.FC<ScoreComponentProps> = ({ color }) => {
+export const ScoreComponent: React.FC<ScoreComponentProps> = ({
+  color,
+  hoverable = false,
+}) => {
   return (
     <View className="flex flex-row items-center justify-center">
       <Text className=" text-base" style={{ color: color }}>
         0
       </Text>
-      <View className="ml-2">
-        <HeroOutline.AcademicCap stroke={'gray'} />
+      <View
+        className={clsx(
+          'ml-2',
+          hoverable ? 'hover:bg-blue-200  rounded-full p-2' : null
+        )}
+      >
+        <HeroOutline.Bolt stroke={'black'} />
       </View>
     </View>
   )

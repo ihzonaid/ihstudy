@@ -2,6 +2,7 @@ import * as React from 'react'
 import { View, Text, Pressable } from 'app/design/styled'
 import { HeroOutline } from '@nandorojo/heroicons'
 import { Link } from 'solito/link'
+import { ScoreComponent } from '../ProgressHeader'
 
 type NavProps = {
   onHamberge?: () => void
@@ -37,7 +38,7 @@ const Nav = ({ onHamberge }: NavProps) => {
        flex-row items-center  justify-between px-2 drop-shadow-md sm:px-16"
       >
         <View className="flex flex-row items-center">
-          <Pressable className="bg-blue-400 hover:bg-blue-600 mr-10 flex h-8 w-20 items-center justify-center rounded-lg sm:w-36">
+          <Pressable className="bg-blue-400 hover:bg-blue-500 mr-10 flex h-8 w-20 items-center justify-center rounded-lg sm:w-36">
             <Text className="text-white text-center text-base font-bold">
               ihStudy
             </Text>
@@ -62,7 +63,8 @@ const Nav = ({ onHamberge }: NavProps) => {
           iconColor={color.onSurface}
           onPress={onHamberge}
         /> */}
-        <HeroOutline.Home />
+
+        <ScoreComponent hoverable={true} color="black" />
       </View>
     </>
   )
