@@ -1,5 +1,6 @@
-import { UserType } from './UserCourse'
-export const user: UserType = {
+import { UserType } from './User'
+import { formatDate } from './UserScore'
+export const DemoUser: UserType = {
   info: {
     name: 'Md. Zonaid',
   },
@@ -52,7 +53,13 @@ export const user: UserType = {
   },
   activeCourse: 'course2',
   score: {
-    total: 0,
-    dateWise: {},
+    total: 90,
+    dateWise: {
+      '2023-09-11': 10,
+      '2023-09-10': 40,
+      '2023-09-8': 40,
+    },
   },
 }
+
+formatDate(new Date())

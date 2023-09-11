@@ -8,10 +8,12 @@ import Nav from 'app/components/web/NavBar'
 import StreakBoard from 'app/components/StreakBoard'
 import { useAppSelector } from 'app/services/hooks/hook'
 import LoginScreen from 'app/features/auth/login/login-screen'
+import { getUserCourses } from 'app/services/storage/user/User'
 
 export const HomeScreen = () => {
   const [loading, setLoading] = useState(true)
   const { user } = useAppSelector((state) => state.user)
+  const { courses } = useAppSelector((state) => state.offlineUser)
 
   const [visible, setVisible] = React.useState(false)
 
@@ -55,8 +57,9 @@ export const HomeScreen = () => {
           Your course history
         </Text>
         <View className="flex flex-col justify-between md:flex-row">
-          <CourseCover hasButton={true} />
-          <CourseCover hasButton={true} />
+          {Object.keys(courses).map((courseId, idx) => (
+            <CourseCover courseId={courseId} hasButton={true} />
+          ))}
         </View>
         {/* </View> */}
       </View>

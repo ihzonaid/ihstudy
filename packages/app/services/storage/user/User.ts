@@ -1,22 +1,22 @@
 import { DateWiseScoreType } from './UserScore'
 
-type LessonType = {
+export type LessonType = {
   lessonId: number
 }
 
-type SubChapterType = {
+export type SubChapterType = {
   subChapterId: number
   lessons: Record<number, LessonType>
   activeLesson: number
 }
 
-type ChapterType = {
+export type ChapterType = {
   chapterId: number
   subchapters: Record<number, SubChapterType>
   activeSubchapter: number
 }
 
-type CourseType = {
+export type CourseType = {
   courseId: string // courseId as a string
   chapters: Record<number, ChapterType>
   activeChapter: number

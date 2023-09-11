@@ -1,4 +1,4 @@
-import { UserType } from './UserCourse'
+import { UserType } from './User'
 
 export type DateWiseScoreType = Record<string, number>
 

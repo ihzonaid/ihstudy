@@ -3,12 +3,14 @@ import { View, Text, Pressable } from 'app/design/styled'
 import { HeroOutline } from '@nandorojo/heroicons'
 import { Link } from 'solito/link'
 import { ScoreComponent } from '../ProgressHeader'
+import { useAppSelector } from 'app/services/hooks/hook'
 
 type NavProps = {
   onHamberge?: () => void
 }
 
 const Nav = ({ onHamberge }: NavProps) => {
+  const { score, info } = useAppSelector((state) => state.offlineUser)
   const [searchQuery, setSearchQuery] = React.useState('')
 
   const onChangeSearch = (query: string) => setSearchQuery(query)
@@ -64,7 +66,7 @@ const Nav = ({ onHamberge }: NavProps) => {
           onPress={onHamberge}
         /> */}
 
-        <ScoreComponent hoverable={true} color="black" />
+        <ScoreComponent score={score.total} hoverable={true} color="black" />
       </View>
     </>
   )

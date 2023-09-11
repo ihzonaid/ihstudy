@@ -3,7 +3,7 @@ import {
   getLessonsForSubChapter,
   getSubchaptersForChapter,
   getUserCourses,
-} from '../UserCourse'
+} from '../User'
 import {
   DateWiseScoreType,
   addScoreForDate,
@@ -11,7 +11,7 @@ import {
   getTotalScoreLast30Days,
   getTotalScoreLast7Days,
 } from '../UserScore'
-import { user } from '../userdb'
+import { DemoUser as user } from '../userdb'
 // Call addScoreForDate to add a score for a specific date
 addScoreForDate(user, '2023-09-10', 10) // Add a score of 10 for September 10, 2023
 

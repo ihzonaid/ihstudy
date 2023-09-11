@@ -99,15 +99,17 @@ function ProgessHeader() {
 interface ScoreComponentProps {
   color: string
   hoverable?: boolean
+  score?: number
 }
 export const ScoreComponent: React.FC<ScoreComponentProps> = ({
   color,
   hoverable = false,
+  score = 0,
 }) => {
   return (
     <View className="flex flex-row items-center justify-center">
       <Text className=" text-base" style={{ color: color }}>
-        0
+        {score}
       </Text>
       <View
         className={clsx(
