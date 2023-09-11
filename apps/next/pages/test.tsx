@@ -2,6 +2,7 @@ import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
 import { ArrowDown } from '@nandorojo/iconic'
+import { IconButton } from 'app/design/material/IconButton'
 
 export default function HomeScreen() {
   const sx = useSx()
@@ -13,9 +14,9 @@ export default function HomeScreen() {
         justifyContent: 'center',
         alignItems: 'center',
         p: 16,
-        bg: 'red',
       }}
     >
+      <IconButton />
       <ArrowDown />
       <H1 sx={{ fontWeight: '800' }}>Welcome to Solito.</H1>
       <View sx={{ maxWidth: 600 }}>

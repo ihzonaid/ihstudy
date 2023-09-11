@@ -16,8 +16,8 @@ const Nav = ({ onHamberge }: NavProps) => {
     return (
       <Link href="/course" className="">
         <View
-          className=" mr-2  flex items-center
-         justify-between  p-1 hover:border-b-2 hover:border-blue-200 "
+          className=" hover:border-blue-200  mr-2 flex
+         items-center  justify-between p-1 hover:border-b-2 "
         >
           {name == 'Home' ? (
             <HeroOutline.Bookmark color={'gray'} />
@@ -33,12 +33,12 @@ const Nav = ({ onHamberge }: NavProps) => {
   return (
     <>
       <View
-        className="shadow-2 mb-4 flex h-14 flex-row
-       items-center justify-between  bg-slate-100 px-2 drop-shadow-md sm:px-16"
+        className="shadow-2 bg-slate-100 mb-4 flex h-14
+       flex-row items-center  justify-between px-2 drop-shadow-md sm:px-16"
       >
         <View className="flex flex-row items-center">
-          <Pressable className="mr-10 flex h-8 w-20 items-center justify-center rounded-lg bg-blue-400 hover:bg-blue-600 sm:w-36">
-            <Text className="text-center text-base font-bold text-white">
+          <Pressable className="bg-blue-400 hover:bg-blue-600 mr-10 flex h-8 w-20 items-center justify-center rounded-lg sm:w-36">
+            <Text className="text-white text-center text-base font-bold">
               ihStudy
             </Text>
           </Pressable>
