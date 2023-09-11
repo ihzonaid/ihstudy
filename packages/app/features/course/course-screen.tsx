@@ -1,4 +1,3 @@
-// import MaterialIcons from '@expo/vector-icons/build/MaterialIcons'
 import React, { useRef, useState } from 'react'
 import {
   Animated,
@@ -16,15 +15,48 @@ import EditAbleText from 'app/components/EditableText'
 import { ChapterItem } from 'app/components/ChapterItem'
 import { divide } from 'lodash'
 
+import { View as DripsyView, Text as DripsyText } from 'dripsy'
+import { createParam } from 'solito'
+import { TextLink } from 'solito/link'
+import { Courses } from 'app/services/storage/course'
+
+const { useParam } = createParam<{ course: string; chapter: string }>()
+
+export function UserDetailScreen() {
+  const [id] = useParam('chapter')
+
+  return (
+    <DripsyView
+      sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    >
+      <DripsyText
+        sx={{ textAlign: 'center', mb: 16, fontWeight: 'bold' }}
+      >{`User ID: ${id}`}</DripsyText>
+
+      <TextLink href="/">👈 Go Home</TextLink>
+    </DripsyView>
+  )
+}
+
 export function CourseScreen() {
-  const { course } = useAppSelector((state) => state.editCourse)
+  const [courseId] = useParam('course')
+  const [scrollY] = useState(new Animated.Value(0))
+
+  // const { course } = useAppSelector((state) => state.editCourse)
   const dispatch = useAppDispatch()
 
-  const [scrollY] = useState(new Animated.Value(0))
   const HEADER_MAX_HEIGHT = 250 // Set your desired maximum height for the top bar
   const HEADER_MIN_HEIGHT = 170 // Set your desired minimum height for the top bar
   const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
   const scrollViewRef = useRef<NativeScrollView>(null)
+
+  if (!courseId) {
+    return <Text>Course is undefined</Text>
+  }
+  const course = Courses[courseId]
+  if (!course) {
+    return <Text> Course not found</Text>
+  }
 
   const handleScroll = Animated.event(
     [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -57,8 +89,8 @@ export function CourseScreen() {
         <Nav />
 
         <View className="flex flex-col justify-center sm:m-auto md:m-0 md:flex-row md:justify-start md:p-5">
-          <View className="md:m-3 lg:m-10 ">
-            <View className="flex flex-col border-2 border-slate-300 md:w-[400px] lg:w-[500px]">
+          <View className="md:m-3 lg:m-10">
+            <View className="flex flex-col border-2 border-slate-300 py-4 md:w-[400px] lg:w-[500px]">
               <View className="web:pt-0 px-2 pt-3" style={{ elevation: 8 }}>
                 <View className="px-4" style={{ elevation: 8 }}>
                   <View className="flex flex-row items-center justify-between py-2">

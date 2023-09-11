@@ -6,19 +6,19 @@ export type LessonType = {
 
 export type SubChapterType = {
   subChapterId: number
-  lessons: Record<number, LessonType>
+  lessons: Record<string, LessonType>
   activeLesson: number
 }
 
 export type ChapterType = {
   chapterId: number
-  subchapters: Record<number, SubChapterType>
+  subchapters: Record<string, SubChapterType>
   activeSubchapter: number
 }
 
 export type CourseType = {
   courseId: string // courseId as a string
-  chapters: Record<number, ChapterType>
+  chapters: Record<string, ChapterType>
   activeChapter: number
 }
 

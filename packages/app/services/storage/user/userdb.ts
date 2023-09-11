@@ -38,11 +38,11 @@ export const DemoUser: UserType = {
           chapterId: 2,
           subchapters: {
             2: {
-              activeLesson: 2,
+              activeLesson: 1,
               subChapterId: 2,
               lessons: {
                 3: {
-                  lessonId: 3,
+                  lessonId: 1,
                 },
               },
             },

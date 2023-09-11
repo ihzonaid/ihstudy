@@ -7,6 +7,7 @@ import {
   getTotalNumberOfUserCompletedLesson,
 } from 'app/services/storage/utils/course'
 import { useAppSelector } from 'app/services/hooks/hook'
+import { useRouter } from 'solito/router'
 
 interface CourseCoverProps {
   hasButton?: boolean
@@ -14,22 +15,28 @@ interface CourseCoverProps {
 }
 
 const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
+  const { push } = useRouter()
+
+  // redux data
   const { courses } = useAppSelector((state) => state.offlineUser)
   const courseInfo = Courses[courseId]!
+  const activeChapter = courses[courseId]?.activeChapter!
+
+  const activeSubchapter =
+    courses[courseId]?.chapters[activeChapter]?.activeSubchapter!
+  const activeLesson =
+    courses[courseId]?.chapters[activeChapter]?.subchapters[activeChapter]
+      ?.activeLesson!
+
   const totalLesson = getTotalNumberOfLesson(courseInfo)
   const totalCompletedLesson = getTotalNumberOfUserCompletedLesson(
     courses,
     courseId
   )
-  courses[courseId]?.chapters
-
-  function resumeCourse(): void {
-    // route the page
-  }
 
   return (
-    <Link href="/content">
-      <Pressable className="max-w-sm rounded-md border-2 border-slate-300 p-5">
+    <View className="max-w-sm rounded-md border-2 border-slate-300 p-5">
+      <Link href={`course/${courseId}`}>
         <View className="h-[150px] bg-slate-500">
           {/* <Image
           className="w-full"
@@ -45,12 +52,14 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
         <View className="my-4 h-2 bg-blue-200">
           <View className="h-2 w-4 bg-blue-500" />
         </View>
+      </Link>
 
-        {hasButton && (
-          <AppButton onPress={resumeCourse} content="Resume course" />
-        )}
-      </Pressable>
-    </Link>
+      <Link
+        href={`course/${courseId}/${activeChapter}/${activeSubchapter}/${activeLesson}`}
+      >
+        {hasButton && <AppButton content="Resume course" />}
+      </Link>
+    </View>
   )
 }
 
