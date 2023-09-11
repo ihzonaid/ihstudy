@@ -44,7 +44,7 @@ export default function EditAbleText({
         </View>
       ) : (
         <Pressable onPress={startEditing}>
-          <Text className={clsx(props.className)} {...props} />
+          <Text className={clsx(props.className, 'text-left')} {...props} />
         </Pressable>
       )}
     </View>

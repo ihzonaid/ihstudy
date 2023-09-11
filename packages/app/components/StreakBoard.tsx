@@ -5,10 +5,10 @@ import clsx from 'clsx'
 
 export default function StreakBoard({}) {
   return (
-    <View className="flex flex-col md:flex-row md:items-center md:justify-between">
-      <View className="flex max-w-sm flex-row items-center px-2 py-4">
-        <View className="w-1/3 p-4">
-          <View className="border-blue-300 flex h-20 w-20 items-center justify-center rounded-full border-4">
+    <View className="flex flex-col  md:flex-row md:items-center md:justify-between">
+      <View className="flex flex-row items-center  py-4">
+        <View className="mr-4">
+          <View className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-blue-300">
             <ScoreComponent color="black" />
           </View>
         </View>
@@ -21,7 +21,7 @@ export default function StreakBoard({}) {
         </View>
       </View>
 
-      <View className="bg-slate-400 mb-5   h-[1px] md:h-full md:w-[1px]" />
+      <View className="mb-5 h-[1px]   bg-slate-400 md:h-full md:w-[1px]" />
 
       <View className="flex w-full flex-row justify-around  md:w-1/2">
         <StreakDay day="Th" isStreak={true} />

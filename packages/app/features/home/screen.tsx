@@ -46,7 +46,7 @@ export const HomeScreen = () => {
         </>
       )}
 
-      <View className="px-2 md:p-10">
+      <View className=" mx-auto max-w-5xl px-2 md:p-10">
         {user && <Text>{user.email}</Text>}
         <StreakBoard />
 
@@ -54,7 +54,10 @@ export const HomeScreen = () => {
         <Text className="my-4 text-left  text-2xl font-bold">
           Your course history
         </Text>
-        <CourseCover hasButton={true} />
+        <View className="flex flex-col justify-between md:flex-row">
+          <CourseCover hasButton={true} />
+          <CourseCover hasButton={true} />
+        </View>
         {/* </View> */}
       </View>
     </>

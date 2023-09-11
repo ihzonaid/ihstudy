@@ -55,7 +55,7 @@ function ProgessHeader() {
 
   return (
     <View
-      className="web:pt-0 flex h-12
+      className="web:pt-0 flex h-14
      flex-row items-center justify-between bg-slate-100 px-6 drop-shadow-md"
     >
       <View className="ml-1 lg:ml-6">

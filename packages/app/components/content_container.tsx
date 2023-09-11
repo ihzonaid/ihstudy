@@ -76,7 +76,7 @@ const ContentContainer = ({
         </EditAbleText>
       ) : (
         // <MarkdownWithChildren>{content}</MarkdownWithChildren>
-        <Text>{content}</Text>
+        <Text className="text-left">{content}</Text>
       )}
     </View>
   )

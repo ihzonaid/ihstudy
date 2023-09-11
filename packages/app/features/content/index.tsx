@@ -91,7 +91,7 @@ export function ContentScreen() {
 
   return (
     <>
-      <View className="fixed top-0 z-10 h-3 w-full">
+      <View className="fixed top-0 z-10  w-full">
         <ProgressHeader />
       </View>
       <ScrollView
@@ -102,7 +102,9 @@ export function ContentScreen() {
         scrollEventThrottle={20}
       >
         <View className="flex-1 items-center !justify-center px-2">
-          <View className="mx-auto  w-full sm:w-2/3 md:w-2/3 lg:w-1/2">
+          <View className="mx-auto w-full   sm:w-2/3 md:w-2/3 lg:w-1/2">
+            {/* <View className="mx-auto max-w-5xl bg-red-100"> */}
+
             {/* {showHint && <Hint close={closeHint} />} */}
 
             <View className="mb-3 ml-2 mt-20">

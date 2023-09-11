@@ -84,7 +84,7 @@ export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
   }
 
   return (
-    <View className="bg-slate-200 p-2">
+    <View className=" my-4 bg-surface-100">
       {!isFlipped && (
         <View>
           <EditAbleText
@@ -95,7 +95,7 @@ export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
           >
             {mcq.question}
           </EditAbleText>
-          <View className=" py-2">
+          <View className="py-2">
             {mcq.options.map((v, i) => (
               <CardOption
                 option={v}
@@ -135,7 +135,7 @@ export default function CardQuiz({ question, lid, cid }: CardQuizProps) {
         <View className="flex flex-col">
           <Text className="my-2 text-xl font-bold">Explaination</Text>
           <EditAbleText
-            className="my-4 text-base"
+            className="my-4 text-left text-base"
             onSave={(explaination) =>
               dispatch(updateMCQExplaination({ lid, cid, explaination }))
             }
@@ -207,18 +207,15 @@ function CardOption({
   submitted,
 }: CardOptionProps) {
   const dispatch = useDispatch()
-  const [hovered, setHovered] = useState(false)
   const { cid, lid, oid } = ids
 
   return (
     <Pressable
       disabled={disabled}
-      onHoverIn={() => setHovered(true)}
-      onHoverOut={() => setHovered(false)}
       onPress={handlePress}
       className={clsx(
         'my-1 flex flex-row items-center   p-2',
-        hovered && 'bg-slate-300',
+        'hover:bg-slate-300',
         !disabled && 'active:bg-slate-400'
       )}
       // style={selected && { transform: [{ rotateY: '180deg' }] }}
