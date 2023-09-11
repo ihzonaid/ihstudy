@@ -17,15 +17,15 @@ const Nav = ({ onHamberge }: NavProps) => {
     return (
       <Link href="/course" className="">
         <View
-          className=" mr-2  flex items-center
-         justify-between  p-1 hover:border-b-2 hover:border-blue-200 "
+          className=" mr-2 flex  h-10 items-center justify-between
+           p-1 hover:border-b-2 hover:border-blue-200 "
         >
           {name == 'Home' ? (
-            <HeroOutline.Bookmark color={'gray'} />
+            <HeroOutline.Bookmark color={'gray'} className="mr-2" />
           ) : (
-            <HeroOutline.BookOpen color={'gray'} />
+            <HeroOutline.BookOpen color={'gray'} className="mr-2" />
           )}
-          <Text className="text-black">{name}</Text>
+          <Text className=" text-black">{name}</Text>
         </View>
       </Link>
     )
@@ -44,7 +44,7 @@ const Nav = ({ onHamberge }: NavProps) => {
             </Text>
           </Pressable>
 
-          <View className="flex h-10  flex-row  p-2">
+          <View className="flex h-10  flex-row  items-center p-2">
             <NavItem name="Home" />
             <NavItem name="Course" />
           </View>

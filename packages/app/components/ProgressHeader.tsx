@@ -1,6 +1,7 @@
 import { HeroOutline } from '@nandorojo/heroicons'
 import { clsx } from 'clsx'
 import { Link } from 'solito/link'
+import colors from 'tailwindcss/colors'
 
 import { Pressable, Text, View } from 'app/design/styled'
 import useTheme from 'app/design/theming/useTheme'
@@ -67,14 +68,13 @@ function ProgessHeader() {
         <View className="hidden md:flex">
           <IconButton name="chevron-left" web={true} />
         </View>
-        <View className="flex flex-1 flex-row ">
+        <View className="flex flex-1 flex-row gap-1 md:gap-2">
           {lessons.map((subLesson, index) => {
             const width = (subLesson.contents.length / 20) * 100
             const progressPercentage = Math.floor(
               ((subLessonIdx + 1) / subLesson.contents.length) * 100
             )
             return (
-              // <Pressable key={index} className="">
               <ProgressContainer
                 key={index}
                 width={width}
@@ -83,7 +83,6 @@ function ProgessHeader() {
                 lessonsLength={lessons.length}
                 progressPercentage={progressPercentage}
               />
-              // </Pressable>
             )
           })}
         </View>
@@ -164,13 +163,13 @@ const ProgressContainer: React.FC<ProgressContainerProps> = ({
         )}
         style={[
           index < lessonIdx
-            ? { backgroundColor: 'green', width: '100%' }
+            ? { backgroundColor: colors.blue[400], width: '100%' }
             : null,
           index === lessonIdx
             ? {
                 width: `${progressPercentage}%`,
                 height: '100%',
-                backgroundColor: 'blue',
+                backgroundColor: colors.blue[300],
               }
             : null,
         ]}
