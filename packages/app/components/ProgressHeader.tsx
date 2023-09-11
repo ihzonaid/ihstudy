@@ -35,7 +35,7 @@ function ProgessHeader() {
       web && 'hidden android:hidden ios:hidden md:flex',
       style
     )
-    const getIcon = (name, className) => {
+    const getIcon = (name: string, className?: string) => {
       if (name == 'close') {
         return <HeroOutline.XMark className={className} stroke="black" />
       } else if (name == 'chevron-left') {

@@ -1,7 +1,11 @@
 import { use, useEffect, useRef, useState } from 'react'
 import { View, Text } from 'app/design/styled'
 // import { ScrollView } from 'app/design/styled'
-import { ScrollView } from 'react-native'
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+} from 'react-native'
 
 import ContentContainer from 'app/components/content_container'
 import AppButton from 'app/components/AppButton'
@@ -74,7 +78,7 @@ export function ContentScreen() {
     toggleHint()
   }
 
-  const handleScroll = (event) => {
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent
     const isHide =
       contentOffset.y + layoutMeasurement.height > contentSize.height - 100
