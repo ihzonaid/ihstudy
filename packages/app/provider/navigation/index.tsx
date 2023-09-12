@@ -18,6 +18,9 @@ export function NavigationProvider({
             screens: {
               home: '',
               'user-detail': 'user/:id',
+              'course-detail': 'course/:course',
+              test: 'test/:id',
+              'content-page': 'course/:course/:chapter/:subchapter/:lesson',
             },
           },
         }),

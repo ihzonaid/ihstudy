@@ -20,26 +20,27 @@ import { createParam } from 'solito'
 import { TextLink } from 'solito/link'
 import { Courses } from 'app/services/storage/course'
 
-const { useParam } = createParam<{ course: string; chapter: string }>()
+const { useParam } = createParam<{ course: string }>()
 
-export function UserDetailScreen() {
-  const [id] = useParam('chapter')
+// export function UserDetailScreen() {
+//   const [id] = useParam('chapter')
 
-  return (
-    <DripsyView
-      sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-    >
-      <DripsyText
-        sx={{ textAlign: 'center', mb: 16, fontWeight: 'bold' }}
-      >{`User ID: ${id}`}</DripsyText>
+//   return (
+//     <DripsyView
+//       sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+//     >
+//       <DripsyText
+//         sx={{ textAlign: 'center', mb: 16, fontWeight: 'bold' }}
+//       >{`User ID: ${id}`}</DripsyText>
 
-      <TextLink href="/">👈 Go Home</TextLink>
-    </DripsyView>
-  )
-}
+//       <TextLink href="/">👈 Go Home</TextLink>
+//     </DripsyView>
+//   )
+// }
 
 export function CourseScreen() {
   const [courseId] = useParam('course')
+
   const [scrollY] = useState(new Animated.Value(0))
 
   // const { course } = useAppSelector((state) => state.editCourse)
@@ -51,7 +52,7 @@ export function CourseScreen() {
   const scrollViewRef = useRef<NativeScrollView>(null)
 
   if (!courseId) {
-    return <Text>Course is undefined</Text>
+    return <Text>CourseId is undefined</Text>
   }
   const course = Courses[courseId]
   if (!course) {
@@ -114,7 +115,12 @@ export function CourseScreen() {
               data={course.chapters}
               renderItem={({ item, index }) => (
                 // <Text>hi</Text>
-                <ChapterItem key={index} index={index} chapter={item} />
+                <ChapterItem
+                  courseId={courseId}
+                  key={index}
+                  index={index}
+                  chapter={item}
+                />
               )}
               keyExtractor={(item, index) => index.toString()} // Assuming you don't have unique IDs in the data.
             />
@@ -131,10 +137,10 @@ export function CourseScreen() {
           className=" web:pt-0 w-full px-2 pt-5 text-3xl"
           style={{ elevation: 5 }}
         >
-          <View className="flex flex-row justify-between">
-            {/* <IconButton icon="chevron-left" /> */}
-            <ScoreComponent color="black" />
-          </View>
+          {/* <View className="flex flex-row justify-between"> */}
+          {/* <IconButton icon="chevron-left" /> */}
+          {/* <ScoreComponent color="black" /> */}
+          {/* </View> */}
 
           <View className="bottom-2 px-4 pb-5" style={{ elevation: 8 }}>
             <View className="flex flex-row items-center justify-between py-2">
@@ -165,7 +171,12 @@ export function CourseScreen() {
           <CourseCoverScrollPart courseDescription={course.description} />
 
           {course.chapters.map((subChapter, i) => (
-            <ChapterItem index={i} key={i} chapter={subChapter} />
+            <ChapterItem
+              courseId={courseId}
+              index={i}
+              key={i}
+              chapter={subChapter}
+            />
           ))}
         </ScrollView>
       </View>

@@ -5,7 +5,7 @@ import { View, Pressable, Text } from 'app/design/styled'
 import EditAbleText from './EditableText'
 import { HeroOutline } from '@nandorojo/heroicons'
 import { Link } from 'solito/link'
-import { ReactChildren } from 'react'
+import { createSlug } from 'app/utils/slug'
 
 export enum subLessonState {
   'completed',
@@ -18,15 +18,18 @@ interface LessonItemProps {
   state: subLessonState
   id: number
   chapterId: number
+  courseId: string
 }
 
 export const SubChapterItem: React.FC<LessonItemProps> = ({
+  courseId,
   id,
   subChapter,
   state,
   chapterId,
 }) => {
   const dispatch = useAppDispatch()
+  const subchapterSlug = createSlug(subChapter.title)
 
   const UI: React.FC = () => {
     if (state == subLessonState.completed) {
@@ -78,7 +81,7 @@ export const SubChapterItem: React.FC<LessonItemProps> = ({
     <View className="pl-7">
       <View className="sm ml-10 h-6 w-1 bg-slate-400" />
 
-      <Link href="/content">
+      <Link href={`${courseId}/${chapterId}/${subchapterSlug}/${id}`}>
         <View className="flex flex-row items-center p-2">
           <UI />
           {state !== subLessonState.current ? (

@@ -34,9 +34,11 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
     courseId
   )
 
+  console.log('coureId from couse cover', courseId)
+
   return (
     <View className="max-w-sm rounded-md border-2 border-slate-300 p-5">
-      <Link href={`course/${courseId}`}>
+      <Link href={`/course/${courseId}/`}>
         <View className="h-[150px] bg-slate-500">
           {/* <Image
           className="w-full"
@@ -55,7 +57,7 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
       </Link>
 
       <Link
-        href={`course/${courseId}/${activeChapter}/${activeSubchapter}/${activeLesson}`}
+        href={`/course/${courseId}/${activeChapter}/${activeSubchapter}/${activeLesson}`}
       >
         {hasButton && <AppButton content="Resume course" />}
       </Link>

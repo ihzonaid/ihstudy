@@ -9,6 +9,7 @@ import StreakBoard from 'app/components/StreakBoard'
 import { useAppSelector } from 'app/services/hooks/hook'
 import LoginScreen from 'app/features/auth/login/login-screen'
 import { getUserCourses } from 'app/services/storage/user/User'
+import { Link } from 'solito/link'
 
 export const HomeScreen = () => {
   const [loading, setLoading] = useState(true)
@@ -49,7 +50,13 @@ export const HomeScreen = () => {
       )}
 
       <View className=" mx-auto max-w-5xl px-2 md:p-10">
-        {user && <Text>{user.email}</Text>}
+        {/* {user && <Text>{user.email}</Text>} */}
+        <Link href={'/test/zonaid/id4'}>
+          <Text>user 2</Text>
+        </Link>
+        <Link href={`/course/course1/1/1/1`}>
+          <Text> go to content</Text>
+        </Link>
         <StreakBoard />
 
         {/* <View className="flex flex-col items-center"> */}

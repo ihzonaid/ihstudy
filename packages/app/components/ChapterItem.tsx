@@ -7,11 +7,16 @@ import EditAbleText from './EditableText'
 import { SubChapterItem, subLessonState } from './SubChapterItem'
 
 interface ChapterItemProps {
+  courseId: string
   index: number
   chapter: Chapter
 }
 
-export const ChapterItem: React.FC<ChapterItemProps> = ({ index, chapter }) => {
+export const ChapterItem: React.FC<ChapterItemProps> = ({
+  index,
+  chapter,
+  courseId,
+}) => {
   const [expanded, setExpanded] = useState(false)
   const handlePress = () => {
     setExpanded(!expanded)
@@ -30,6 +35,7 @@ export const ChapterItem: React.FC<ChapterItemProps> = ({ index, chapter }) => {
         {expanded &&
           chapter.subChapters.map((subChapter, i) => (
             <SubChapterItem
+              courseId={courseId}
               chapterId={index}
               subChapter={subChapter}
               key={i}

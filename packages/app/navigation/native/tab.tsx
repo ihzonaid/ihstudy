@@ -1,26 +1,60 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ContentScreen } from 'app/features/content'
+import { ContentScreenWrapper } from 'app/features/content/content-screen-wrapper'
 import { CourseScreen } from 'app/features/course/course-screen'
 import { HomeScreen } from 'app/features/home/screen'
 import { TestScreen } from 'app/features/test'
 import { HeroOutline } from '@nandorojo/heroicons'
+import { UserDetailScreen } from 'app/features/user/detail-screen'
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator<{
+  home: undefined
+  'user-detail': {
+    id: string
+  }
+  'course-detail': {
+    course: string
+  }
+  'content-page': {
+    course: string
+    chater: string
+    subchapter: string
+    lesson: string
+  }
+  test: { id: string }
+}>()
 
 export function MyTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="home"
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <HeroOutline.Home color={color} />,
         }}
       />
-      <Tab.Screen name="course" component={CourseScreen} />
-      <Tab.Screen name="content" component={ContentScreen} />
-      <Tab.Screen name="test" component={TestScreen} />
+      <Tab.Screen
+        name="course-detail"
+        component={CourseScreen}
+        options={{
+          tabBarLabel: 'Course',
+          tabBarIcon: ({ color, size }) => (
+            <HeroOutline.BookOpen color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="content-page"
+        component={ContentScreenWrapper}
+        options={{
+          tabBarLabel: 'Content',
+          tabBarIcon: ({ color, size }) => (
+            <HeroOutline.QuestionMarkCircle color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen name="test" component={UserDetailScreen} />
     </Tab.Navigator>
   )
 }

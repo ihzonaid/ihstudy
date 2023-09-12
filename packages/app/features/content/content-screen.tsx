@@ -10,7 +10,7 @@ import {
 import ContentContainer from 'app/components/content_container'
 import AppButton from 'app/components/AppButton'
 
-import { Content, ContentType } from 'app/services/storage/model'
+import { Content, ContentType, Lesson } from 'app/services/storage/model'
 import { addContent, incrementIndex, resetIndex } from 'app/store/sublesson'
 import { useAppSelector, useAppDispatch } from 'app/services/hooks/hook'
 import { incrementLessonIdx } from 'app/store/lessons'
@@ -22,14 +22,35 @@ import { updateLessonTitle } from 'app/store/editLesson'
 import AddContent from 'app/components/AddContent'
 import { Hint } from 'app/components/Hint'
 
-export function ContentScreen() {
+import { Courses } from 'app/services/storage/course'
+
+type ContentScreenProps = {
+  courseId: string
+  chapterId: string
+  subchapterId: string
+}
+
+export function ContentScreen({
+  chapterId,
+  courseId,
+  subchapterId,
+}: ContentScreenProps) {
   const [showButton, setShowButton] = useState(true)
   const [showHint, setHint] = useState(true)
   const scrollViewRef = useRef<ScrollView>(null)
   const { index } = useAppSelector((state) => state.subLesson)
   const { lessonIdx } = useAppSelector((state) => state.lesson)
   const dispatch = useAppDispatch()
-  const { lessons, edible } = useAppSelector((state) => state.editLesson)
+  const { edible } = useAppSelector((state) => state.editLesson)
+
+  // new implementation
+  // let onePageLesson: Lesson
+  // let lessonIdx: number
+  let lessons: Lesson[]
+  const course = Courses[courseId]!
+  const chapter = course.chapters[parseInt(chapterId)]!
+  const subchapter = chapter.subChapters[parseInt(subchapterId)]!
+  lessons = subchapter.lessons
   const onePageLesson = lessons[lessonIdx]!
 
   // useEffects
@@ -110,9 +131,10 @@ export function ContentScreen() {
             <View className="mb-3 ml-2 mt-20">
               <EditAbleText
                 className="text-2xl font-bold"
-                onSave={(data) =>
-                  dispatch(updateLessonTitle({ lid: lessonIdx, title: data }))
-                }
+                // onSave={(data) =>
+                //   dispatch(updateLessonTitle({ lid: lessonIdx, title: data })
+                //   )
+                // }
               >
                 {onePageLesson.title}
               </EditAbleText>
