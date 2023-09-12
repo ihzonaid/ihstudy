@@ -1,3 +1,2 @@
-import { ContentScreenWrapper } from 'app/features/content/content-screen-wrapper'
-
-export default ContentScreenWrapper
+import { ContentVerify } from 'app/features/content/content-verify'
+export default ContentVerify

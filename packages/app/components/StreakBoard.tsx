@@ -31,7 +31,7 @@ export default function StreakBoard({}) {
 
       <View className="flex w-full flex-row justify-around  md:w-1/2">
         {lastWeek.map((day, i) => {
-          return <StreakDay day={day} isStreak={i == 4} />
+          return <StreakDay key={i} day={day} isStreak={i == 4} />
         })}
       </View>
     </View>

@@ -40,13 +40,50 @@ export function getContentScreenUrl(
     return `${id}-${slug}`
   }
 
-  const chpaterSlug = addSlugWithId(chapterId, createSlug(chapter.title))
+  const chpaterSlug = addSlugWithId(chapterId + 1, createSlug(chapter.title))
   const subchpaterSlug = addSlugWithId(
-    subChapterId,
+    subChapterId + 1,
     createSlug(subChapter.title)
   )
 
   return `/course/${courseId}/${chpaterSlug}/${subchpaterSlug}/${
-    lessonId ? lessonId : 0
+    lessonId ? lessonId + 1 : 1
   }`
+}
+
+function getIdFromSlug(slug: string) {
+  const parts = slug.split('-')
+  if (parts.length > 0) {
+    return parts[0]!
+  } else {
+    // Handle the case where the slug doesn't contain any hyphens
+    return slug
+  }
+}
+
+export type AllIds = {
+  parsedChapterId: number
+  parsedSubchapterId: number
+  parsedLessonId: number
+}
+
+export function slugParsingValidationAndIds(
+  chapSlug: string,
+  subSlug: string,
+  lesId: string
+): Error | AllIds {
+  const parsedLessonId = parseInt(lesId)
+  if (!parsedLessonId) {
+    return Error(`LessonId: ${lesId}  can't parsed`)
+  }
+  const parsedChapterId = parseInt(getIdFromSlug(chapSlug))
+  if (!parsedChapterId) {
+    return Error(`Chapterslug: can't parsed`)
+  }
+
+  const parsedSubchapterId = parseInt(getIdFromSlug(subSlug))
+  if (!parsedSubchapterId) {
+    return Error("SubChapterslug can't parsed")
+  }
+  return { parsedChapterId, parsedSubchapterId, parsedLessonId }
 }

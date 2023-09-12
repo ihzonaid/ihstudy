@@ -11,7 +11,12 @@ import {
 import ContentContainer from 'app/components/content_container'
 import AppButton from 'app/components/AppButton'
 
-import { Content, ContentType, Lesson } from 'app/services/storage/model'
+import {
+  Content,
+  ContentType,
+  Lesson,
+  SubChapter,
+} from 'app/services/storage/model'
 import { addContent, incrementIndex, resetIndex } from 'app/store/sublesson'
 import { useAppSelector, useAppDispatch } from 'app/services/hooks/hook'
 import { incrementLessonIdx } from 'app/store/lessons'
@@ -26,16 +31,10 @@ import { Hint } from 'app/components/Hint'
 import { Courses } from 'app/services/storage/course'
 
 type ContentScreenProps = {
-  courseId: string
-  chapterId: string
-  subchapterId: string
+  subChapter: SubChapter
 }
 
-export function ContentScreen({
-  chapterId,
-  courseId,
-  subchapterId,
-}: ContentScreenProps) {
+export function ContentScreen({ subChapter }: ContentScreenProps) {
   const [showButton, setShowButton] = useState(true)
   const [showHint, setHint] = useState(true)
   const scrollViewRef = useRef<ScrollView>(null)
@@ -45,12 +44,9 @@ export function ContentScreen({
   const { edible } = useAppSelector((state) => state.editLesson)
 
   // new implementation
-  // let onePageLesson: Lesson
-  // let lessonIdx: number
   let lessons: Lesson[]
-  const course = Courses[courseId]!
-  const chapter = course.chapters[parseInt(chapterId)]!
-  const subchapter = chapter.subChapters[parseInt(subchapterId)]!
+  // const subchapter = chapter.subChapters[parseInt(subchapterId)]!
+  const subchapter = subChapter
   lessons = subchapter.lessons
   const onePageLesson = lessons[lessonIdx]!
 

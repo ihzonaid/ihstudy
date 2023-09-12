@@ -19,7 +19,6 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
   const { courses: userCourses } = useAppSelector((state) => state.offlineUser)
   const courseInfo = Courses[courseId]!
   const activeChapterId = userCourses[courseId]?.activeChapter!
-
   const activeSubchapterId =
     userCourses[courseId]?.chapters[activeChapterId]?.activeSubchapter!
   const activeLessonId =
@@ -60,7 +59,7 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
         </View>
       </Link>
 
-      <Link href={typeof url == 'string' ? `/course/${url}` : '#'}>
+      <Link href={typeof url == 'string' ? url : '#'}>
         {hasButton && <AppButton content="Resume course" />}
       </Link>
     </View>

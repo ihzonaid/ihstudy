@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ContentScreenWrapper } from 'app/features/content/content-screen-wrapper'
 import { CourseScreen } from 'app/features/course/course-screen'
 import { HomeScreen } from 'app/features/home/screen'
 import { TestScreen } from 'app/features/test'
 import { HeroOutline } from '@nandorojo/heroicons'
 import { UserDetailScreen } from 'app/features/user/detail-screen'
+import { ContentVerify } from 'app/features/content/content-verify'
 
 const Tab = createBottomTabNavigator<{
   home: undefined
@@ -47,7 +47,7 @@ export function MyTabs() {
       />
       <Tab.Screen
         name="content-page"
-        component={ContentScreenWrapper}
+        component={ContentVerify}
         options={{
           tabBarLabel: 'Content',
           tabBarIcon: ({ color, size }) => (
