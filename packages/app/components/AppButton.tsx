@@ -17,10 +17,10 @@ const AppButton = ({ content, type, onPress }: AppButtonProps) => {
     <Pressable
       className="mb-5 flex
        w-full flex-row justify-center
-        rounded-md bg-slate-700 py-2 text-white"
+        rounded-md bg-slate-700 py-2 "
       onPress={onPress}
     >
-      <Text className="text-lg">{content}</Text>
+      <Text className="text-lg text-white">{content}</Text>
     </Pressable>
   )
 }

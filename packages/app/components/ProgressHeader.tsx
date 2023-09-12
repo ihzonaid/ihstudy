@@ -57,7 +57,7 @@ function ProgessHeader() {
   return (
     <View
       className="web:pt-0 flex h-14
-     flex-row items-center justify-between bg-slate-100 px-6 drop-shadow-md"
+     flex-row items-center justify-between bg-slate-100 drop-shadow-md md:px-6"
     >
       <View className="ml-1 lg:ml-6">
         <IconButton name="close" />
@@ -107,7 +107,7 @@ export const ScoreComponent: React.FC<ScoreComponentProps> = ({
   score = 0,
 }) => {
   return (
-    <View className="flex flex-row items-center justify-center">
+    <View className="flex flex-row items-center justify-center p-2">
       <Text className=" text-base" style={{ color: color }}>
         {score}
       </Text>

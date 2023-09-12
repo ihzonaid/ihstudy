@@ -39,7 +39,8 @@ export default function StreakBoard({}) {
 }
 
 function StreakDay({ day, isStreak }: { day: String; isStreak?: boolean }) {
-  let className = 'flex justify-center items-center   h-16 py-2 rounded-xl '
+  let className =
+    'flex flex-col justify-center items-center   h-16 py-2 rounded-xl '
   if (isStreak) className = className + ' border-2 border-slate-500'
   return (
     <View className={clsx(className, 'px-4')}>

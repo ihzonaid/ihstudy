@@ -5,6 +5,7 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   ScrollView,
+  Platform,
 } from 'react-native'
 
 import ContentContainer from 'app/components/content_container'
@@ -116,19 +117,19 @@ export function ContentScreen({
         <ProgressHeader />
       </View>
       <ScrollView
-        style={{ paddingBottom: 250 }}
+        style={[Platform.OS === 'web' ? { paddingBottom: 250 } : null]}
         className=" bg-slate-100 pb-80"
         onScroll={handleScroll}
         ref={scrollViewRef}
         scrollEventThrottle={20}
       >
-        <View className="flex-1 items-center !justify-center px-2">
+        <View className="flex-1 items-center !justify-center  px-2">
           <View className="mx-auto w-full   sm:w-2/3 md:w-2/3 lg:w-1/2">
             {/* <View className="mx-auto max-w-5xl bg-red-100"> */}
 
             {/* {showHint && <Hint close={closeHint} />} */}
 
-            <View className="mb-3 ml-2 mt-20">
+            <View className="web:mt-20 mb-3 ml-2">
               <EditAbleText
                 className="text-2xl font-bold"
                 // onSave={(data) =>
@@ -167,19 +168,24 @@ export function ContentScreen({
 
             {edible ? <AddContent lid={lessonIdx} /> : null}
 
-            {
-              <View className="hidden w-24  px-2 sm:flex">
-                <AppButton content="Continue" onPress={onPress} />
-              </View>
-            }
+            <View className="hidden w-24  px-2 sm:flex">
+              <AppButton content="Continue" onPress={onPress} />
+            </View>
           </View>
         </View>
-        {showButton && (
-          <View className="fixed bottom-2 w-full px-2 sm:hidden">
+        {/* {showButton && (
+          <View className="fixed bottom-2 w-full bg-blue-100 px-2 sm:hidden">
             <AppButton content="Continue" onPress={onPress} />
           </View>
-        )}
+        )} */}
       </ScrollView>
+
+      {/*This button works for cross web and native*/}
+      {showButton && (
+        <View className="fixed bottom-2 w-full  px-2 sm:hidden">
+          <AppButton content="Continue" onPress={onPress} />
+        </View>
+      )}
     </>
   )
 }

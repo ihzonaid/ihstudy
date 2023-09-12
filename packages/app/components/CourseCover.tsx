@@ -34,8 +34,6 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
     courseId
   )
 
-  console.log('coureId from couse cover', courseId)
-
   return (
     <View className="max-w-sm rounded-md border-2 border-slate-300 p-5">
       <Link href={`/course/${courseId}/`}>

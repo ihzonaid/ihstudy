@@ -31,6 +31,7 @@ export function MyTabs() {
         component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <HeroOutline.Home color={color} />,
         }}
       />

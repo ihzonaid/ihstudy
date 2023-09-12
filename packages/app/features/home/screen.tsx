@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { View, Text } from 'app/design/styled'
-import { Platform } from 'react-native'
+import { Platform, ScrollView } from 'react-native'
 import { styled } from 'nativewind'
 
 import CourseCover from 'app/components/CourseCover'
@@ -10,6 +10,7 @@ import { useAppSelector } from 'app/services/hooks/hook'
 import LoginScreen from 'app/features/auth/login/login-screen'
 import { getUserCourses } from 'app/services/storage/user/User'
 import { Link } from 'solito/link'
+// import { ScrollView } from 'dripsy'
 
 export const HomeScreen = () => {
   const [loading, setLoading] = useState(true)
@@ -48,28 +49,29 @@ export const HomeScreen = () => {
           </>
         </>
       )}
+      <ScrollView>
+        <View className="web:mx-auto max-w-5xl px-2 md:p-10">
+          {/* {user && <Text>{user.email}</Text>} */}
+          <Link href={'/test/zonaid/id4'}>
+            <Text>user 2</Text>
+          </Link>
+          <Link href={`/course/course1/1/1/1`}>
+            <Text> go to content</Text>
+          </Link>
+          <StreakBoard />
 
-      <View className=" mx-auto max-w-5xl px-2 md:p-10">
-        {/* {user && <Text>{user.email}</Text>} */}
-        <Link href={'/test/zonaid/id4'}>
-          <Text>user 2</Text>
-        </Link>
-        <Link href={`/course/course1/1/1/1`}>
-          <Text> go to content</Text>
-        </Link>
-        <StreakBoard />
-
-        {/* <View className="flex flex-col items-center"> */}
-        <Text className="my-4 text-left  text-2xl font-bold">
-          Your course history
-        </Text>
-        <View className="flex flex-col justify-between md:flex-row">
-          {Object.keys(courses).map((courseId, idx) => (
-            <CourseCover courseId={courseId} hasButton={true} />
-          ))}
+          {/* <View className="flex flex-col items-center"> */}
+          <Text className="my-4 text-left  text-2xl font-bold">
+            Your course history
+          </Text>
+          <View className="flex flex-col justify-between md:flex-row">
+            {Object.keys(courses).map((courseId, idx) => (
+              <CourseCover key={idx} courseId={courseId} hasButton={true} />
+            ))}
+          </View>
+          {/* </View> */}
         </View>
-        {/* </View> */}
-      </View>
+      </ScrollView>
     </>
   )
 }
