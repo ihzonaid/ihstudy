@@ -7,7 +7,7 @@ import {
   getTotalNumberOfUserCompletedLesson,
 } from 'app/services/storage/utils/course'
 import { useAppSelector } from 'app/services/hooks/hook'
-import { useRouter } from 'solito/router'
+import { getContentScreenUrl } from 'app/utils/slug'
 
 interface CourseCoverProps {
   hasButton?: boolean
@@ -15,22 +15,28 @@ interface CourseCoverProps {
 }
 
 const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
-  const { push } = useRouter()
-
   // redux data
-  const { courses } = useAppSelector((state) => state.offlineUser)
+  const { courses: userCourses } = useAppSelector((state) => state.offlineUser)
   const courseInfo = Courses[courseId]!
-  const activeChapter = courses[courseId]?.activeChapter!
+  const activeChapterId = userCourses[courseId]?.activeChapter!
 
-  const activeSubchapter =
-    courses[courseId]?.chapters[activeChapter]?.activeSubchapter!
-  const activeLesson =
-    courses[courseId]?.chapters[activeChapter]?.subchapters[activeChapter]
-      ?.activeLesson!
+  const activeSubchapterId =
+    userCourses[courseId]?.chapters[activeChapterId]?.activeSubchapter!
+  const activeLessonId =
+    userCourses[courseId]?.chapters[activeChapterId]?.subchapters[
+      activeChapterId
+    ]?.activeLesson!
+
+  const url = getContentScreenUrl(
+    courseId,
+    activeChapterId,
+    activeChapterId,
+    activeLessonId
+  )
 
   const totalLesson = getTotalNumberOfLesson(courseInfo)
   const totalCompletedLesson = getTotalNumberOfUserCompletedLesson(
-    courses,
+    userCourses,
     courseId
   )
 
@@ -54,9 +60,7 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
         </View>
       </Link>
 
-      <Link
-        href={`/course/${courseId}/${activeChapter}/${activeSubchapter}/${activeLesson}`}
-      >
+      <Link href={typeof url == 'string' ? `/course/${url}` : '#'}>
         {hasButton && <AppButton content="Resume course" />}
       </Link>
     </View>
