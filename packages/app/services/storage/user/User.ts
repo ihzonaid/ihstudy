@@ -4,22 +4,66 @@ export type LessonType = {
   lessonId: number
 }
 
+function generateDefaultLessonType(lessId: number): LessonType {
+  const newLesson = {
+    lessonId: lessId,
+  }
+  return newLesson
+}
+
 export type SubChapterType = {
   subChapterId: number
-  lessons: Record<string, LessonType>
+  lessons: Record<number, LessonType>
   activeLesson: number
 }
 
+function generateDefaultSubChapterType(
+  subId: number,
+  lessId: number
+): SubChapterType {
+  return {
+    subChapterId: subId,
+    activeLesson: lessId,
+    lessons: { [lessId]: generateDefaultLessonType(lessId) },
+  }
+}
+// console.log(generateDefaultSubChapterType())
+
 export type ChapterType = {
   chapterId: number
-  subchapters: Record<string, SubChapterType>
+  subchapters: Record<number, SubChapterType>
   activeSubchapter: number
 }
 
+function generateDefaultChapterType(
+  chapId: number,
+  subId: number,
+  lessId: number
+): ChapterType {
+  return {
+    chapterId: chapId,
+    activeSubchapter: subId,
+    subchapters: { [subId]: generateDefaultSubChapterType(subId, lessId) },
+  }
+}
+// console.log(generateDefaultChapterType())
+
 export type CourseType = {
   courseId: string // courseId as a string
-  chapters: Record<string, ChapterType>
+  chapters: Record<number, ChapterType>
   activeChapter: number
+}
+function generateDefaultCourseType(
+  courId: string,
+  chapId: number,
+  subId: number,
+  lessId: number
+): CourseType {
+  return {
+    activeChapter: chapId,
+    chapters: { [chapId]: generateDefaultChapterType(chapId, subId, lessId) },
+    courseId: courId,
+  }
 }
 
 export type UserType = {
@@ -32,6 +76,7 @@ export type UserType = {
     total: number
     dateWise: DateWiseScoreType
   }
+  test: Record<number, LessonType>
 }
 
 // Method to get all user courses
@@ -89,4 +134,8 @@ export {
   getLessonsForSubChapter,
   getSubchaptersForChapter,
   getUserCourses,
+  generateDefaultChapterType,
+  generateDefaultCourseType,
+  generateDefaultLessonType,
+  generateDefaultSubChapterType,
 }

@@ -1,7 +1,7 @@
 import { ContentScreenWrapper } from 'app/features/content/content-screen-wrapper'
 import { createParam } from 'solito'
 import { validateDataExist } from 'app/services/storage/utils/validate'
-import { slugParsingValidationAndIds } from 'app/utils/slug'
+import { AllIds, slugParsingValidationAndIds } from 'app/utils/slug'
 
 const { useParam } = createParam<{
   course: string
@@ -44,9 +44,15 @@ export function ContentVerify() {
       return <p>Data don't not exists in database</p>
     }
 
-    subChapter
+    const properIds: AllIds = {
+      chapterId: parsedChapterId,
+      courseId: courseId,
+      lessonId: parsedLessonId,
+      subChapterId: parsedSubchapterId,
+    }
     return (
       <ContentScreenWrapper
+        ids={properIds}
         subChapter={subChapter}
         lesson={{ lessonId: parsedLessonId, setLessonId }}
       />

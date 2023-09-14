@@ -60,8 +60,14 @@ function getIdFromSlug(slug: string) {
     return slug
   }
 }
-
 export type AllIds = {
+  courseId: string
+  chapterId: number
+  subChapterId: number
+  lessonId: number
+}
+
+export type AllParsedIds = {
   parsedChapterId: number
   parsedSubchapterId: number
   parsedLessonId: number
@@ -71,7 +77,7 @@ export function slugParsingValidationAndIds(
   chapSlug: string,
   subSlug: string,
   lesId: string
-): Error | AllIds {
+): Error | AllParsedIds {
   const parsedLessonId = parseInt(lesId)
   if (!parsedLessonId) {
     return Error(`LessonId: ${lesId}  can't parsed`)

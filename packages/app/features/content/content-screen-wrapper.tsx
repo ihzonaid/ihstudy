@@ -3,6 +3,7 @@ import { ContentScreen } from 'app/features/content/content-screen'
 import { useAppDispatch, useAppSelector } from 'app/services/hooks/hook'
 import { SubChapter } from 'app/services/storage/model'
 import { setLessonIndex, setLessonIndexId } from 'app/store/lessons'
+import { AllIds } from 'app/utils/slug'
 import { useEffect } from 'react'
 import { createParam } from 'solito'
 type ContentScreenProps = {
@@ -11,11 +12,13 @@ type ContentScreenProps = {
     lessonId: number
     setLessonId: (value: string | undefined, options?: any) => void
   }
+  ids: AllIds
 }
 
 export function ContentScreenWrapper({
   subChapter,
   lesson,
+  ids,
 }: ContentScreenProps) {
   const { lessonIdx } = useAppSelector((state) => state.lesson)
   const dispatch = useAppDispatch()
@@ -31,6 +34,6 @@ export function ContentScreenWrapper({
   }, [lessonIdx])
 
   // if (courseId && chapterId && subchapterId && lessonId) {
-  return <ContentScreen subChapter={subChapter} />
+  return <ContentScreen ids={ids} subChapter={subChapter} />
   // } else return <div>{`${courseId} ${chapterId} ${subchapterId}`}</div>
 }

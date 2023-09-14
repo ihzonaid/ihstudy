@@ -7,51 +7,11 @@ export const DemoUser: UserType = {
   courses: {
     course1: {
       courseId: 'course1',
-      activeChapter: 1,
-      chapters: {
-        1: {
-          activeSubchapter: 1,
-          chapterId: 1,
-          subchapters: {
-            1: {
-              activeLesson: 1,
-              subChapterId: 1,
-              lessons: {
-                1: {
-                  lessonId: 1,
-                },
-                2: {
-                  lessonId: 2,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    course2: {
-      activeChapter: 1,
-      courseId: 'course2',
-      chapters: {
-        2: {
-          activeSubchapter: 1,
-          chapterId: 2,
-          subchapters: {
-            2: {
-              activeLesson: 1,
-              subChapterId: 2,
-              lessons: {
-                3: {
-                  lessonId: 1,
-                },
-              },
-            },
-          },
-        },
-      },
+      activeChapter: 0,
+      chapters: { 0: { activeSubchapter: 0, chapterId: 0, subchapters: {} } },
     },
   },
-  activeCourse: 'course2',
+  activeCourse: 'course1',
   score: {
     total: 90,
     dateWise: {
@@ -60,6 +20,7 @@ export const DemoUser: UserType = {
       '2023-09-8': 40,
     },
   },
+  test: {},
 }
 
 formatDate(new Date())

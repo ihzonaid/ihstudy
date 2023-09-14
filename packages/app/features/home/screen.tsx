@@ -52,12 +52,6 @@ export const HomeScreen = () => {
       <ScrollView>
         <View className="web:mx-auto max-w-5xl px-2 md:p-10">
           {/* {user && <Text>{user.email}</Text>} */}
-          <Link href={'/test/zonaid/id4'}>
-            <Text>user 2</Text>
-          </Link>
-          <Link href={`/course/course1/1/1/1`}>
-            <Text> go to content</Text>
-          </Link>
           <StreakBoard />
 
           {/* <View className="flex flex-col items-center"> */}

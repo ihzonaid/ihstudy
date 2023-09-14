@@ -29,12 +29,15 @@ import AddContent from 'app/components/AddContent'
 import { Hint } from 'app/components/Hint'
 
 import { Courses } from 'app/services/storage/course'
+import { updateUserProgressState } from 'app/store/userOfflineStore'
+import { AllIds } from 'app/utils/slug'
 
 type ContentScreenProps = {
   subChapter: SubChapter
+  ids: AllIds
 }
 
-export function ContentScreen({ subChapter }: ContentScreenProps) {
+export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   const [showButton, setShowButton] = useState(true)
   const [showHint, setHint] = useState(true)
   const scrollViewRef = useRef<ScrollView>(null)
@@ -62,8 +65,16 @@ export function ContentScreen({ subChapter }: ContentScreenProps) {
 
   useEffect(() => {
     return () => {
-      // console.log("lessonIdx", lessonIdx)
+      const { chapterId, courseId, subChapterId } = ids
       // dispatch(changeLesson(lessonIdx))
+      dispatch(
+        updateUserProgressState({
+          chapterId,
+          courseId,
+          subChapterId,
+          lessonId: lessonIdx,
+        })
+      )
       dispatch(resetIndex())
     }
   }, [lessonIdx])
