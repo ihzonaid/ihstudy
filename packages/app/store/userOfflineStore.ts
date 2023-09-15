@@ -92,41 +92,6 @@ const slice = createSlice({
 
         state.activeCourse = courseId
       }
-      //   // set this as active course
-      //   if (state.courses[courseId]!.chapters[chapterId]) {
-      //   } else {
-      //     const newDefaultChapter = generateDefaultChapterType(chapterId)
-      //     state.courses[courseId]!.chapters[chapterId] = newDefaultChapter
-      //   }
-      //   // as surely this chapter exists so add this as active chapter
-      //   state.courses[courseId]!.activeChapter = chapterId
-
-      //   if (
-      //     state.courses[courseId]!.chapters[chapterId]!.subchapters[subchapterId]
-      //   ) {
-      //   } else {
-      //     const newSubchapter = generateDefaultSubChapterType(subchapterId)
-      //     state.courses[courseId]!.chapters[chapterId]!.subchapters[
-      //       subchapterId
-      //     ] = newSubchapter
-      //   }
-      //   // as surely subchpater exist
-      //   state.courses[courseId]!.chapters[chapterId]!.activeSubchapter =
-      //     subchapterId
-
-      //   if (
-      //     state.courses[courseId]!.chapters[chapterId]!.subchapters[subchapterId]!
-      //       .lessons[lessonId]
-      //   ) {
-      //   } else {
-      //     const newLesson = generateDefaultLessonType(lessonId)
-      //     state.courses[courseId]!.chapters[chapterId]!.subchapters[
-      //       subchapterId
-      //     ]!.lessons[lessonId] = newLesson
-      //   }
-      //   state.courses[courseId]!.chapters[chapterId]!.subchapters[
-      //     subchapterId
-      //   ]!.activeLesson = lessonId
     },
   },
 })

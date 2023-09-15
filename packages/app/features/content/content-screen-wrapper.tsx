@@ -1,11 +1,11 @@
-import { P } from 'app/components/Themed'
 import { ContentScreen } from 'app/features/content/content-screen'
 import { useAppDispatch, useAppSelector } from 'app/services/hooks/hook'
 import { SubChapter } from 'app/services/storage/model'
-import { setLessonIndex, setLessonIndexId } from 'app/store/lessons'
+import { setLessonIdx } from 'app/store/lessons'
+import { updateUserProgressState } from 'app/store/userOfflineStore'
 import { AllIds } from 'app/utils/slug'
 import { useEffect } from 'react'
-import { createParam } from 'solito'
+
 type ContentScreenProps = {
   subChapter: SubChapter
   lesson: {
@@ -24,7 +24,8 @@ export function ContentScreenWrapper({
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setLessonIndexId(lesson.lessonId))
+    console.log('setting lesson idx', lesson.lessonId)
+    dispatch(setLessonIdx(lesson.lessonId))
   }, [])
 
   useEffect(() => {
@@ -32,6 +33,11 @@ export function ContentScreenWrapper({
     // To adjust router param
     lesson.setLessonId((lesson.lessonId + 1).toString())
   }, [lessonIdx])
+
+  useEffect(() => {
+    console.log('user progress first')
+    dispatch(updateUserProgressState({ ...ids }))
+  }, [])
 
   // if (courseId && chapterId && subchapterId && lessonId) {
   return <ContentScreen ids={ids} subChapter={subChapter} />

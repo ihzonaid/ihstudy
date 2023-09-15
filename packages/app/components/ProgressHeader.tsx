@@ -17,7 +17,9 @@ interface IconButtonProps {
 function ProgessHeader() {
   const { colors } = useTheme()
   const { lessonIdx } = useAppSelector((state) => state.lesson)
-  const { index: subLessonIdx } = useAppSelector((state) => state.subLesson)
+  const { contentIdx: subLessonIdx } = useAppSelector(
+    (state) => state.subLesson
+  )
   const { lessons } = useAppSelector((state) => state.editLesson)
 
   const handlePress = () => {

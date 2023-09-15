@@ -2,6 +2,9 @@ import { ContentScreenWrapper } from 'app/features/content/content-screen-wrappe
 import { createParam } from 'solito'
 import { validateDataExist } from 'app/services/storage/utils/validate'
 import { AllIds, slugParsingValidationAndIds } from 'app/utils/slug'
+import { useAppDispatch } from 'app/services/hooks/hook'
+import { updateUserProgressState } from 'app/store/userOfflineStore'
+import { useEffect } from 'react'
 
 const { useParam } = createParam<{
   course: string
@@ -14,6 +17,8 @@ export function ContentVerify() {
   const [chapterSlug] = useParam('chapter')
   const [subchapterSlug] = useParam('subchapter')
   const [lessonId, setLessonId] = useParam('lesson')
+
+  const dispatch = useAppDispatch()
 
   if (courseId && chapterSlug && subchapterSlug && lessonId) {
     const ids = slugParsingValidationAndIds(
@@ -50,6 +55,7 @@ export function ContentVerify() {
       lessonId: parsedLessonId,
       subChapterId: parsedSubchapterId,
     }
+
     return (
       <ContentScreenWrapper
         ids={properIds}

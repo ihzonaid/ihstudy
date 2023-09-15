@@ -17,7 +17,11 @@ import {
   Lesson,
   SubChapter,
 } from 'app/services/storage/model'
-import { addContent, incrementIndex, resetIndex } from 'app/store/sublesson'
+import {
+  addContent,
+  incrementContentIndex,
+  resetContentIndex,
+} from 'app/store/sublesson'
 import { useAppSelector, useAppDispatch } from 'app/services/hooks/hook'
 import { incrementLessonIdx } from 'app/store/lessons'
 import ProgressHeader from 'app/components/ProgressHeader'
@@ -31,6 +35,7 @@ import { Hint } from 'app/components/Hint'
 import { Courses } from 'app/services/storage/course'
 import { updateUserProgressState } from 'app/store/userOfflineStore'
 import { AllIds } from 'app/utils/slug'
+import { useMemo } from 'react'
 
 type ContentScreenProps = {
   subChapter: SubChapter
@@ -41,42 +46,42 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   const [showButton, setShowButton] = useState(true)
   const [showHint, setHint] = useState(true)
   const scrollViewRef = useRef<ScrollView>(null)
-  const { index } = useAppSelector((state) => state.subLesson)
+  const { contentIdx } = useAppSelector((state) => state.subLesson)
   const { lessonIdx } = useAppSelector((state) => state.lesson)
   const dispatch = useAppDispatch()
   const { edible } = useAppSelector((state) => state.editLesson)
 
   // new implementation
-  let lessons: Lesson[]
   // const subchapter = chapter.subChapters[parseInt(subchapterId)]!
-  const subchapter = subChapter
-  lessons = subchapter.lessons
-  const onePageLesson = lessons[lessonIdx]!
+
+  const [onePageLesson, lessonsLength] = useMemo(() => {
+    const subchapter = subChapter
+    const lessons = subchapter.lessons
+    return [lessons[lessonIdx]!, lessons.length]
+  }, [lessonIdx, subChapter])
 
   // useEffects
   useEffect(() => {
     return () => {
-      if (onePageLesson.contents[index]!.type === ContentType.info) {
-        const newContent = onePageLesson.contents[index]!
+      if (onePageLesson.contents[contentIdx]!.type === ContentType.info) {
+        const newContent = onePageLesson.contents[contentIdx]!
         dispatch(addContent(newContent))
       }
     }
-  }, [index])
+  }, [contentIdx])
 
   useEffect(() => {
-    return () => {
-      const { chapterId, courseId, subChapterId } = ids
-      // dispatch(changeLesson(lessonIdx))
-      dispatch(
-        updateUserProgressState({
-          chapterId,
-          courseId,
-          subChapterId,
-          lessonId: lessonIdx,
-        })
-      )
-      dispatch(resetIndex())
-    }
+    const { chapterId, courseId, subChapterId, lessonId } = ids
+    // dispatch(changeLesson(lessonIdx))
+    dispatch(
+      updateUserProgressState({
+        chapterId,
+        courseId,
+        subChapterId,
+        lessonId: lessonIdx,
+      })
+    )
+    dispatch(resetContentIndex())
   }, [lessonIdx])
 
   // Functions
@@ -86,22 +91,22 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
 
   function onPress() {
     if (edible) {
-      if (lessonIdx >= lessons.length - 1) {
+      if (lessonIdx >= lessonsLength - 1) {
         return
       }
       dispatch(incrementLessonIdx())
       return
     }
 
-    if (index >= onePageLesson.contents.length - 1) {
+    if (contentIdx >= onePageLesson.contents.length - 1) {
       // Handle lesson progression
-      if (lessonIdx >= lessons.length - 1) {
+      if (lessonIdx >= lessonsLength - 1) {
         return
       }
       dispatch(incrementLessonIdx())
       return
     }
-    dispatch(incrementIndex())
+    dispatch(incrementContentIndex())
 
     scrollViewRef.current?.scrollToEnd({ animated: true })
     toggleHint()
@@ -155,18 +160,18 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
                     <RenderContent
                       key={idx}
                       cid={idx}
-                      index={index}
+                      index={contentIdx}
                       item={item}
                       lessonIdx={lessonIdx}
                     />
                   )
                 })
-              : onePageLesson.contents.slice(0, index).map((item, idx) => {
+              : onePageLesson.contents.slice(0, contentIdx).map((item, idx) => {
                   return (
                     <RenderContent
                       key={idx}
                       cid={idx}
-                      index={index}
+                      index={contentIdx}
                       item={item}
                       lessonIdx={lessonIdx}
                     />
