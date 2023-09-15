@@ -8,7 +8,20 @@ export const DemoUser: UserType = {
     course1: {
       courseId: 'course1',
       activeChapter: 0,
-      chapters: { 0: { activeSubchapter: 0, chapterId: 0, subchapters: {} } },
+      chapters: {
+        0: { activeSubchapter: 0, chapterId: 0, subchapters: {} },
+        1: {
+          activeSubchapter: 0,
+          chapterId: 0,
+          subchapters: {
+            1: {
+              subChapterId: 1,
+              activeLesson: 1,
+              lessons: { 0: { lessonId: 0 } },
+            },
+          },
+        },
+      },
     },
   },
   activeCourse: 'course1',

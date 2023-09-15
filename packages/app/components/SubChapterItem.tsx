@@ -1,4 +1,4 @@
-import { useAppDispatch } from 'app/services/hooks/hook'
+import { useAppDispatch, useAppSelector } from 'app/services/hooks/hook'
 import { SubChapter } from 'app/services/storage/model'
 import { updateSubChapterTitle } from 'app/store/editCourse'
 import { View, Pressable, Text } from 'app/design/styled'
@@ -7,6 +7,7 @@ import { HeroOutline } from '@nandorojo/heroicons'
 import { Link } from 'solito/link'
 import { createSlug, getContentScreenUrl } from 'app/utils/slug'
 import { Courses } from 'app/services/storage/course'
+import { getCompletedLessons } from 'app/services/storage/utils/course'
 
 export enum subLessonState {
   'completed',
@@ -31,8 +32,10 @@ export const SubChapterItem: React.FC<LessonItemProps> = ({
 }) => {
   const dispatch = useAppDispatch()
   const subchapterSlug = createSlug(subChapter.title)
+  const { courses } = useAppSelector((state) => state.offlineUser)
 
-  const url = getContentScreenUrl(courseId, chapterId, id)
+  const lessons = getCompletedLessons(courses, courseId, chapterId, id)
+  const url = getContentScreenUrl(courseId, chapterId, id, undefined, lessons)
 
   const UI: React.FC = () => {
     if (state == subLessonState.completed) {

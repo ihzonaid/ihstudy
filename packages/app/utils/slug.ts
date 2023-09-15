@@ -1,4 +1,5 @@
 import { Courses } from 'app/services/storage/course'
+import { CourseType } from 'app/services/storage/user/User'
 
 export function createSlug(inputString: string): string {
   const slug = inputString.toLowerCase().replace(/\s+/g, '-')
@@ -9,7 +10,8 @@ export function getContentScreenUrl(
   courseId: string,
   chapterId: number,
   subChapterId: number,
-  lessonId?: number
+  lessonId?: number,
+  lessons?: number[]
 ) {
   const course = Courses[courseId]
   if (!course) {
@@ -30,7 +32,21 @@ export function getContentScreenUrl(
       cause: 'SubChapter with this id not found',
     })
   }
-  const lesson = subChapter.lessons[lessonId ? lessonId : 0]
+
+  let targetLessonId = lessonId ? lessonId : 0
+  if (!lessonId) {
+    if (lessons) {
+      const incompleteLesson = subChapter.lessons
+        .map((_, index) => index)
+        .filter((index) => !lessons.includes(index))
+      // get incompleted
+      const firstIncompleteLesson = incompleteLesson?.[0] ?? 0
+      targetLessonId = firstIncompleteLesson
+    } else {
+      targetLessonId = 0
+    }
+  }
+  const lesson = subChapter.lessons[targetLessonId]
   if (!lesson) {
     return Error('Lesson not found', {
       cause: 'Lesson with this id not found',
@@ -46,9 +62,7 @@ export function getContentScreenUrl(
     createSlug(subChapter.title)
   )
 
-  return `/course/${courseId}/${chpaterSlug}/${subchpaterSlug}/${
-    lessonId ? lessonId + 1 : 1
-  }`
+  return `/course/${courseId}/${chpaterSlug}/${subchpaterSlug}/${targetLessonId}`
 }
 
 function getIdFromSlug(slug: string) {

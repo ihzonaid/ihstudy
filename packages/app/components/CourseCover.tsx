@@ -29,7 +29,7 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
   const url = getContentScreenUrl(
     courseId,
     activeChapterId,
-    activeChapterId,
+    activeSubchapterId,
     activeLessonId
   )
 
