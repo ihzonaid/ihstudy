@@ -33,7 +33,10 @@ import AddContent from 'app/components/AddContent'
 import { Hint } from 'app/components/Hint'
 
 import { Courses } from 'app/services/storage/course'
-import { updateUserProgressState } from 'app/store/userOfflineStore'
+import {
+  updateUserProgressState,
+  updateUserScore,
+} from 'app/store/userOfflineStore'
 import { AllIds } from 'app/utils/slug'
 import { useMemo } from 'react'
 
@@ -45,6 +48,8 @@ type ContentScreenProps = {
 export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   const [showButton, setShowButton] = useState(true)
   const [showHint, setHint] = useState(true)
+  const [completed, setCompleted] = useState(false)
+  const [score, setScore] = useState(0)
   const scrollViewRef = useRef<ScrollView>(null)
   const { contentIdx } = useAppSelector((state) => state.subLesson)
   const { lessonIdx } = useAppSelector((state) => state.lesson)
@@ -92,15 +97,18 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   function onPress() {
     if (edible) {
       if (lessonIdx >= lessonsLength - 1) {
-        return
+        // Download the json
       }
       dispatch(incrementLessonIdx())
       return
     }
 
     if (contentIdx >= onePageLesson.contents.length - 1) {
-      // Handle lesson progression
+      // Handle lessons completion
       if (lessonIdx >= lessonsLength - 1) {
+        setCompleted(true)
+        // Update user progress and score
+        dispatch(updateUserScore({ score })) // need persist to test
         return
       }
       dispatch(incrementLessonIdx())
@@ -121,6 +129,14 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
 
   function closeHint(): void {
     setHint(false)
+  }
+
+  if (completed) {
+    return (
+      <View>
+        <Text>completed</Text>
+      </View>
+    )
   }
 
   return (

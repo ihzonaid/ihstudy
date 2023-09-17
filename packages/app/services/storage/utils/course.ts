@@ -56,7 +56,6 @@ function getCompletedLessons(
   const lesson =
     courses[courseId]?.chapters[chapterId]?.subchapters[subChapterId]?.lessons
   if (lesson) {
-    console.log('in functon', lesson)
     return Object.keys(lesson).map(Number)
   } else {
     return []

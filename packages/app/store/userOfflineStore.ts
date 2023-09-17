@@ -6,6 +6,7 @@ import {
   generateDefaultSubChapterType,
   generateDefaultLessonType,
 } from 'app/services/storage/user/User'
+import { formatDate } from 'app/services/storage/user/UserScore'
 import { DemoUser } from 'app/services/storage/user/userdb'
 
 const initialState: UserType = {
@@ -93,8 +94,19 @@ const slice = createSlice({
         state.activeCourse = courseId
       }
     },
+    updateUserScore: (state, action: PayloadAction<{ score: number }>) => {
+      const today = formatDate(new Date())
+      const score = action.payload.score
+      const todayScore = state.score.dateWise[today]
+      if (todayScore) {
+        state.score.dateWise[today] += score
+      } else {
+        state.score.dateWise[today] = score
+      }
+      state.score.total += score
+    },
   },
 })
 
-export const { updateUserProgressState } = slice.actions
+export const { updateUserProgressState, updateUserScore } = slice.actions
 export default slice.reducer

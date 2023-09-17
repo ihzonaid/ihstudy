@@ -62,7 +62,9 @@ export function getContentScreenUrl(
     createSlug(subChapter.title)
   )
 
-  return `/course/${courseId}/${chpaterSlug}/${subchpaterSlug}/${targetLessonId}`
+  return `/course/${courseId}/${chpaterSlug}/${subchpaterSlug}/${
+    targetLessonId + 1
+  }`
 }
 
 function getIdFromSlug(slug: string) {
