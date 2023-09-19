@@ -5,6 +5,7 @@ import { TestScreen } from 'app/features/test'
 import { HeroOutline } from '@nandorojo/heroicons'
 import { UserDetailScreen } from 'app/features/user/detail-screen'
 import { ContentVerify } from 'app/features/content/content-verify'
+import { AllCourseScreen } from 'app/features/course/all-course-screen'
 
 const Tab = createBottomTabNavigator<{
   home: undefined
@@ -14,6 +15,7 @@ const Tab = createBottomTabNavigator<{
   'course-detail': {
     course: string
   }
+  course: undefined
   'content-page': {
     course: string
     chater: string
@@ -40,6 +42,16 @@ export function MyTabs() {
         component={CourseScreen}
         options={{
           tabBarLabel: 'Course',
+          tabBarIcon: ({ color, size }) => (
+            <HeroOutline.BookOpen color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="course"
+        component={AllCourseScreen}
+        options={{
+          tabBarLabel: 'Courses',
           tabBarIcon: ({ color, size }) => (
             <HeroOutline.BookOpen color={color} />
           ),

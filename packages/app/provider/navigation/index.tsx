@@ -21,6 +21,7 @@ export function NavigationProvider({
               'course-detail': 'course/:course',
               test: 'test/:id',
               'content-page': 'course/:course/:chapter/:subchapter/:lesson',
+              course: '/course',
             },
           },
         }),

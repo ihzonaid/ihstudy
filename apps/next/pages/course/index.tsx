@@ -1,7 +1,2 @@
-export default function Course() {
-  return (
-    <div>
-      <p>All course route</p>
-    </div>
-  )
-}
+import { AllCourseScreen } from 'app/features/course/all-course-screen'
+export default AllCourseScreen

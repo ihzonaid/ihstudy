@@ -54,14 +54,22 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
         </Text>
         <Text className="my-2 text-base font-bold">{courseInfo.title}</Text>
         <Text className="text-sm">{courseInfo.description}</Text>
-        <View className="my-4 h-2 bg-blue-200">
-          <View className="h-2 w-4 bg-blue-500" />
-        </View>
       </Link>
 
-      <Link href={typeof url == 'string' ? url : '#'}>
-        {hasButton && <AppButton content="Resume course" />}
-      </Link>
+      {url instanceof Error ? (
+        ''
+      ) : (
+        <>
+          {' '}
+          {/* this should not be in all course */}
+          <View className="my-4 h-2 bg-blue-200">
+            <View className="h-2 w-4 bg-blue-500" />
+          </View>
+          <Link href={typeof url == 'string' ? url : '#'}>
+            {hasButton && <AppButton content="Resume course" />}
+          </Link>
+        </>
+      )}
     </View>
   )
 }
