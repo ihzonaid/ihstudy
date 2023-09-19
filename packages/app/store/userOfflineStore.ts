@@ -114,12 +114,14 @@ const slice = createSlice({
       }>
     ) => {
       const { courseId, chapterId, subChapterId: subchapterId } = action.payload
-      const course = state.courses[chapterId]
+      const course = state.courses[courseId]
       if (course) {
         const chapter = course.chapters[chapterId]
         if (chapter) {
           const subChapter = chapter.subchapters[subchapterId]
           if (subChapter) {
+            // subchapter completed or not
+            // state.courses[courseId]!.chapters[chapterId]!.activeSubchapter++
             state.courses[courseId]!.chapters[chapterId]!.subchapters[
               subchapterId
             ]!.completed = true

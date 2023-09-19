@@ -26,19 +26,30 @@ export const ChapterItem: React.FC<ChapterItemProps> = ({
   }
 
   const getState = (i: number) => {
+    // console.log('curseId', courseId, 'chpate', index, 'subchater', i)
     const course = courses[courseId]
+
     if (course) {
-      const chpater = course.chapters[index]
+      const chapter = course.chapters[index]
       if (chapter) {
-        const subChpater = chapter.subChapters[i] as SubChapterType | undefined
+        const subChpater = chapter.subchapters[i]
         if (subChpater) {
+          // active subchpater and completed subchpater
+          if (chapter.activeSubchapter == i && subChpater.completed) {
+            return subLessonState.completed
+          }
           if (subChpater.completed) {
             return subLessonState.completed
           }
-          if (subChpater.activeLesson == i) {
+
+          // console.log(chapter.activeSubchapter, '==', i)
+          if (chapter.activeSubchapter == i) {
             return subLessonState.current
           }
-          if (i == 0) return subLessonState.current
+          // if (subChpater.subChapterId == i) {
+          //   return subLessonState.current
+          // }
+          // if (i == 0) return subLessonState.current
           // else if (i < 0) return subLessonState.completed
           return subLessonState.notCompleted
         } else {

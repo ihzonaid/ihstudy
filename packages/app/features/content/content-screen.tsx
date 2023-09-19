@@ -112,7 +112,7 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
         // Update user score
         dispatch(updateUserScore({ score })) // need persist to test
         // Update user progress lesson completion
-        updateLessonCompletion({ courseId, chapterId, subChapterId })
+        dispatch(updateLessonCompletion({ courseId, chapterId, subChapterId }))
         return
       }
       dispatch(incrementLessonIdx())

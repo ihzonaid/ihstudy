@@ -9,7 +9,6 @@ export const DemoUser: UserType = {
       courseId: 'course1',
       activeChapter: 0,
       chapters: {
-        0: { activeSubchapter: 0, chapterId: 0, subchapters: {} },
         1: {
           activeSubchapter: 0,
           chapterId: 0,
