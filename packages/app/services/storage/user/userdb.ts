@@ -15,6 +15,7 @@ export const DemoUser: UserType = {
           chapterId: 0,
           subchapters: {
             1: {
+              completed: false,
               subChapterId: 1,
               activeLesson: 1,
               lessons: { 0: { lessonId: 0 } },

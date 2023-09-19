@@ -32,13 +32,14 @@ import { updateLessonTitle } from 'app/store/editLesson'
 import AddContent from 'app/components/AddContent'
 import { Hint } from 'app/components/Hint'
 
-import { Courses } from 'app/services/storage/course'
 import {
+  updateLessonCompletion,
   updateUserProgressState,
   updateUserScore,
 } from 'app/store/userOfflineStore'
 import { AllIds } from 'app/utils/slug'
 import { useMemo } from 'react'
+import Congratulation from 'app/components/Congratulation'
 
 type ContentScreenProps = {
   subChapter: SubChapter
@@ -55,6 +56,8 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   const { lessonIdx } = useAppSelector((state) => state.lesson)
   const dispatch = useAppDispatch()
   const { edible } = useAppSelector((state) => state.editLesson)
+
+  const { chapterId, courseId, subChapterId, lessonId } = ids
 
   // new implementation
   // const subchapter = chapter.subChapters[parseInt(subchapterId)]!
@@ -76,7 +79,6 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   }, [contentIdx])
 
   useEffect(() => {
-    const { chapterId, courseId, subChapterId, lessonId } = ids
     // dispatch(changeLesson(lessonIdx))
     dispatch(
       updateUserProgressState({
@@ -107,8 +109,10 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
       // Handle lessons completion
       if (lessonIdx >= lessonsLength - 1) {
         setCompleted(true)
-        // Update user progress and score
+        // Update user score
         dispatch(updateUserScore({ score })) // need persist to test
+        // Update user progress lesson completion
+        updateLessonCompletion({ courseId, chapterId, subChapterId })
         return
       }
       dispatch(incrementLessonIdx())
@@ -132,11 +136,7 @@ export function ContentScreen({ subChapter, ids }: ContentScreenProps) {
   }
 
   if (completed) {
-    return (
-      <View>
-        <Text>completed</Text>
-      </View>
-    )
+    return <Congratulation />
   }
 
   return (

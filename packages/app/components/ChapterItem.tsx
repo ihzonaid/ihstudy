@@ -1,10 +1,11 @@
-import { useAppDispatch } from 'app/services/hooks/hook'
+import { useAppDispatch, useAppSelector } from 'app/services/hooks/hook'
 import { Chapter } from 'app/services/storage/model'
 import { updateChapterTitle } from 'app/store/editCourse'
 import React, { useState } from 'react'
 import { View, Pressable, Text } from 'app/design/styled'
 import EditAbleText from './EditableText'
 import { SubChapterItem, subLessonState } from './SubChapterItem'
+import { SubChapterType } from 'app/services/storage/user/User'
 
 interface ChapterItemProps {
   courseId: string
@@ -18,14 +19,45 @@ export const ChapterItem: React.FC<ChapterItemProps> = ({
   courseId,
 }) => {
   const [expanded, setExpanded] = useState(false)
+  const { courses } = useAppSelector((state) => state.offlineUser)
+
   const handlePress = () => {
     setExpanded(!expanded)
   }
 
   const getState = (i: number) => {
-    if (i == 1) return subLessonState.current
-    else if (i < 0) return subLessonState.completed
-    else return subLessonState.notCompleted
+    const course = courses[courseId]
+    if (course) {
+      const chpater = course.chapters[index]
+      if (chapter) {
+        const subChpater = chapter.subChapters[i] as SubChapterType | undefined
+        if (subChpater) {
+          if (subChpater.completed) {
+            return subLessonState.completed
+          }
+          if (subChpater.activeLesson == i) {
+            return subLessonState.current
+          }
+          if (i == 0) return subLessonState.current
+          // else if (i < 0) return subLessonState.completed
+          return subLessonState.notCompleted
+        } else {
+          if (i == 0) return subLessonState.current
+          // else if (i < 0) return subLessonState.completed
+          return subLessonState.notCompleted
+        }
+      } else {
+        if (i == 0) return subLessonState.current
+        // else if (i < 0) return subLessonState.completed
+        return subLessonState.notCompleted
+      }
+    } else {
+      // first time user in the course, so his default progress would be no completion of chapter
+      // active chpater, subchapter, lesson would be 0
+      if (i == 0) return subLessonState.current
+      // else if (i < 0) return subLessonState.completed
+      return subLessonState.notCompleted
+    }
   }
 
   return (

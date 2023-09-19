@@ -15,6 +15,7 @@ export type SubChapterType = {
   subChapterId: number
   lessons: Record<number, LessonType>
   activeLesson: number
+  completed: boolean
 }
 
 function generateDefaultSubChapterType(
@@ -24,6 +25,8 @@ function generateDefaultSubChapterType(
   return {
     subChapterId: subId,
     activeLesson: lessId,
+    completed: false,
+
     lessons: { [lessId]: generateDefaultLessonType(lessId) },
   }
 }

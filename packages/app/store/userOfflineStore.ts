@@ -105,8 +105,34 @@ const slice = createSlice({
       }
       state.score.total += score
     },
+    updateLessonCompletion: (
+      state,
+      action: PayloadAction<{
+        courseId: string
+        chapterId: number
+        subChapterId: number
+      }>
+    ) => {
+      const { courseId, chapterId, subChapterId: subchapterId } = action.payload
+      const course = state.courses[chapterId]
+      if (course) {
+        const chapter = course.chapters[chapterId]
+        if (chapter) {
+          const subChapter = chapter.subchapters[subchapterId]
+          if (subChapter) {
+            state.courses[courseId]!.chapters[chapterId]!.subchapters[
+              subchapterId
+            ]!.completed = true
+          }
+        }
+      }
+    },
   },
 })
 
-export const { updateUserProgressState, updateUserScore } = slice.actions
+export const {
+  updateUserProgressState,
+  updateUserScore,
+  updateLessonCompletion,
+} = slice.actions
 export default slice.reducer
