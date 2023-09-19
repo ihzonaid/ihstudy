@@ -56,9 +56,7 @@ const CourseCover = ({ hasButton, courseId }: CourseCoverProps) => {
         <Text className="text-sm">{courseInfo.description}</Text>
       </Link>
 
-      {url instanceof Error ? (
-        ''
-      ) : (
+      {url instanceof Error ? null : (
         <>
           {' '}
           {/* this should not be in all course */}
