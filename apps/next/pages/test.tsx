@@ -2,7 +2,15 @@ import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
 import { ArrowDown } from '@nandorojo/iconic'
-import { IconButton } from 'app/design/material/IconButton'
+import { IconButton } from 'app/design/material/button/IconButton'
+import ElevatedButton from 'app/design/material/button/ElevatedButton'
+import ElevatedIconButton from 'app/design/material/button/ElevatedIconButton'
+import {
+  FilledButton,
+  TextButton,
+  TonalButto,
+  FloatingActionButton,
+} from 'app/design/material/button'
 
 export default function HomeScreen() {
   const sx = useSx()
@@ -16,7 +24,21 @@ export default function HomeScreen() {
         p: 16,
       }}
     >
-      <IconButton />
+      <div className="rounded-2xl border border-gray-200 bg-neutral-10 p-6 dark:border-gray-700 dark:bg-neutral-900 md:p-8">
+        <FilledButton />
+        <TextButton />
+        <TonalButto />
+        <IconButton />
+        <ElevatedButton />
+        <ElevatedIconButton />
+        <div className="mb-6 flex flex-wrap items-center gap-2 rounded py-4">
+          <FloatingActionButton type="large" />
+          <FloatingActionButton type="extended" />
+          <FloatingActionButton type="medium" />
+          <FloatingActionButton type="small" />
+        </div>
+      </div>
+
       <ArrowDown />
       <H1 sx={{ fontWeight: '800' }}>Welcome to Solito.</H1>
       <View sx={{ maxWidth: 600 }}>
@@ -51,7 +73,7 @@ export default function HomeScreen() {
           Regular Link
         </TextLink>
         <View sx={{ width: 32 }} />
-        <MotiLink
+        {/* <MotiLink
           href="/user/fernando"
           animate={({ hovered, pressed }) => {
             'worklet'
@@ -76,7 +98,7 @@ export default function HomeScreen() {
           >
             Moti Link
           </Text>
-        </MotiLink>
+        </MotiLink> */}
       </Row>
     </View>
   )
